@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'login_page.dart';
+import 'imageselection_page.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ImageApp());
 
 class MyApp extends StatelessWidget {
   @override
