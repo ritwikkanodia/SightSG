@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'imageselection_page.dart';
-class ImageController {
+import '../Boundary/imageselection_page.dart';
 
+class ImageController {
   ImageController();
 
   static Widget getImageWidget(UserImage selectedFile) {

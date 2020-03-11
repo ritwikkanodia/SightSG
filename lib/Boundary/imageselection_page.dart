@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'ImageController.dart';
+import '../Control/ImageController.dart';
 
 void main() => runApp(ImageApp());
 
@@ -31,11 +31,11 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _inProcess = false;
 
   getImage(ImageSource source) async {
-    this.setState((){
+    this.setState(() {
       _inProcess = true;
     });
     File image = await ImagePicker.pickImage(source: source);
-    if(image != null){
+    if (image != null) {
       File cropped = await ImageCropper.cropImage(
           sourcePath: image.path,
           compressQuality: 100,
@@ -47,17 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
             toolbarTitle: "RPS Cropper",
             statusBarColor: Colors.deepOrange.shade900,
             backgroundColor: Colors.white,
-          )
-      );
+          ));
 
-      this.setState((){
-        if(cropped != null) {
+      this.setState(() {
+        if (cropped != null) {
           _selectedFile = UserImage(cropped);
         }
         _inProcess = false;
       });
     } else {
-      this.setState((){
+      this.setState(() {
         _inProcess = false;
       });
     }
@@ -67,62 +66,62 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
+      children: <Widget>[
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            ImageController.getImageWidget(_selectedFile),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                ImageController.getImageWidget(_selectedFile),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    MaterialButton(
-                        color: Colors.green,
-                        child: Text(
-                          "Camera",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          getImage(ImageSource.camera);
-                        }),
-                    MaterialButton(
-                        color: Colors.deepOrange,
-                        child: Text(
-                          "Device",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          getImage(ImageSource.gallery);
-                        })
-                  ],
-                )
+                MaterialButton(
+                    color: Colors.green,
+                    child: Text(
+                      "Camera",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      getImage(ImageSource.camera);
+                    }),
+                MaterialButton(
+                    color: Colors.deepOrange,
+                    child: Text(
+                      "Device",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      getImage(ImageSource.gallery);
+                    })
               ],
-            ),
-            (_inProcess)?Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height * 0.95,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ):Center()
+            )
           ],
-        )
-    );
+        ),
+        (_inProcess)
+            ? Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.95,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : Center()
+      ],
+    ));
   }
 }
-
 
 class UserImage {
   File _image;
 
-  UserImage(image){
+  UserImage(image) {
     this._image = image;
   }
 
-  File getImage(){
+  File getImage() {
     return this._image;
   }
 
-  void setImage(File image){
+  void setImage(File image) {
     this._image = image;
   }
 }

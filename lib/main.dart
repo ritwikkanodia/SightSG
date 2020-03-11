@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'login_page.dart';
-import 'imageselection_page.dart';
+import 'Boundary/login_page.dart';
+import 'Boundary/imageselection_page.dart';
 
 void main() => runApp(ImageApp());
 
