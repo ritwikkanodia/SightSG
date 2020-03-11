@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import '../Control/LoginValidator.dart';
 import '../Boundary/FirstScreenUI.dart';
+import '../Boundary/LoginUI.dart';
 
-class LoginPage extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

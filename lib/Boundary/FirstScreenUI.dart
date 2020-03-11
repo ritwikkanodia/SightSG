@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Boundary/LoginUI.dart';
-import '../Control/GoogleSignInController.dart';
+import '../Control/LoginValidator.dart';
 
 class FirstScreen extends StatelessWidget {
   @override
