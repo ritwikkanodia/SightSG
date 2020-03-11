@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Control/sign_in.dart';
-import '../Boundary/first_screen.dart';
+import '../Boundary/FirstScreenUI.dart';
 
 class LoginPage extends StatefulWidget {
   @override

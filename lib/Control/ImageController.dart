@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Boundary/imageselection_page.dart';
+import '../Boundary/ImageSelectionUI.dart';
 
 class ImageController {
   ImageController();
