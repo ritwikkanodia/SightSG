@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'Boundary/LoginUI.dart';
 import 'Boundary/ImageSelectionUI.dart';
 
-void main() => runApp(ImageApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override

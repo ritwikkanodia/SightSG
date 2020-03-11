@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Boundary/LoginUI.dart';
-import '../Control/sign_in.dart';
+import '../Control/GoogleSignInController.dart';
 
 class FirstScreen extends StatelessWidget {
   @override
@@ -21,7 +21,7 @@ class FirstScreen extends StatelessWidget {
             children: <Widget>[
               CircleAvatar(
                 backgroundImage: NetworkImage(
-                  imageUrl,
+                  'https://www.woolha.com/media/2019/11/dart-using-access-modifier-1200x627.jpg', // User Profile Pic
                 ),
                 radius: 60,
                 backgroundColor: Colors.transparent,
@@ -35,7 +35,7 @@ class FirstScreen extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                name,
+                'name',
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.deepPurple,
@@ -50,7 +50,7 @@ class FirstScreen extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                email,
+                'email', // User Name
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.deepPurple,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Control/sign_in.dart';
+import '../Control/GoogleSignInController.dart';
 import '../Boundary/FirstScreenUI.dart';
 
 class LoginPage extends StatefulWidget {
