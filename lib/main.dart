@@ -1,8 +1,7 @@
-import 'package:assignment_app/Boundary/HomePageUI.dart';
-import 'package:assignment_app/Boundary/NavigationUI.dart';
 import 'package:flutter/material.dart';
 import 'Boundary/LoginUI.dart';
-import 'Boundary/NavigationUI.dart';
+import 'Boundary/HomePageUI.dart';
+import 'Boundary/SelectionUI.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +9,7 @@ void main() => runApp(MyApp());
 //      MaterialApp(
 //        debugShowCheckedModeBanner: false,
 //        home: Scaffold(
-//          body: HomePage(),
+//          body: SelectionPage(),
 //        ),
 //      ),
 //    );
