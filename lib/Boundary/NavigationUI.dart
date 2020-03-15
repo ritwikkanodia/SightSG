@@ -30,7 +30,7 @@ class _NavigationState extends State<Navigation> {
 
   final List<Widget> _children = [
     HomePage(), TextResultUI(),
-    ProfilePage() // create the pages you want to navigate between
+    FirstScreen() // create the pages you want to navigate between
   ];
 
   Widget build(BuildContext context) {
