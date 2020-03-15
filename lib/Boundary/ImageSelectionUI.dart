@@ -4,8 +4,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Control/CameraController.dart';
 
-void main() => runApp(ImageApp());
-
 class ImageApp extends StatelessWidget {
   // This widget is the root of your application.
   @override

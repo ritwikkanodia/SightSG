@@ -1,3 +1,4 @@
+import 'package:assignment_app/Boundary/NavigationUI.dart';
 import 'package:flutter/material.dart';
 import '../Control/LoginValidator.dart';
 import '../Boundary/FirstScreenUI.dart';
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                return FirstScreen();
+                return Navigation();
               },
             ),
           );

@@ -19,7 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlutterLogo(size: 150),
+              Icon(Icons.account_box, size: 100),
               SizedBox(height: 50),
               _signInButton(),
             ],
