@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'sign_in.dart';
-import 'first_screen.dart';
+import '../Control/LoginValidator.dart';
+import '../Boundary/FirstScreenUI.dart';
+import '../Boundary/LoginUI.dart';
 
-class LoginPage extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlutterLogo(size: 150),
+              Icon(Icons.account_box, size: 100),
               SizedBox(height: 50),
               _signInButton(),
             ],
