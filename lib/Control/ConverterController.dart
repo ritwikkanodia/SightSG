@@ -152,18 +152,24 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future readText() async {
+  Future<List> readText() async {
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
     VisionText readText = await recognizeText.processImage(ourImage);
-
+    List listOfBlock = [];
     for (TextBlock block in readText.blocks) { //Print all the text at console
+      List listOfLine = [];
       for (TextLine line in block.lines) {
+        List listOfElement = [];
         for (TextElement word in line.elements) {
+          listOfElement.add(word);
           print(word.text);
         }
+        listOfLine.add(listOfElement);
       }
+      listOfBlock.add(listOfLine);
     }
+    return listOfBlock;
   }
 
   Future decode() async {
