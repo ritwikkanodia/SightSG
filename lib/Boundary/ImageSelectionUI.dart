@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Control/CameraController.dart';
+import '../Entity/UserImage.dart';
 
 class ImageApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -64,62 +65,46 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-      children: <Widget>[
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ImageController.getImageWidget(_selectedFile),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                MaterialButton(
-                    color: Colors.green,
-                    child: Text(
-                      "Camera",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      getImage(ImageSource.camera);
-                    }),
-                MaterialButton(
-                    color: Colors.deepOrange,
-                    child: Text(
-                      "Device",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      getImage(ImageSource.gallery);
-                    })
+                ImageController.getImageWidget(_selectedFile),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    MaterialButton(
+                        color: Colors.green,
+                        child: Text(
+                          "Camera",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          getImage(ImageSource.camera);
+                        }),
+                    MaterialButton(
+                        color: Colors.deepOrange,
+                        child: Text(
+                          "Device",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          getImage(ImageSource.gallery);
+                        })
+                  ],
+                )
               ],
+            ),
+            (_inProcess)
+                ? Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height * 0.95,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             )
+                : Center()
           ],
-        ),
-        (_inProcess)
-            ? Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height * 0.95,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
-            : Center()
-      ],
-    ));
-  }
-}
-
-class UserImage {
-  File _image;
-
-  UserImage(image) {
-    this._image = image;
-  }
-
-  File getImage() {
-    return this._image;
-  }
-
-  void setImage(File image) {
-    this._image = image;
+        ));
   }
 }

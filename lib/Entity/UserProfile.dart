@@ -1,9 +1,9 @@
-import 'Picture.dart';
+import 'UserImage.dart';
 
 class UserProfile {
   int _userID;
   String _userName;
-  List<Picture> pictureList = [];
+  List<UserImage> pictureList = [];
 
   UserProfile(int ID, String Name) {
     this._userID = ID;
@@ -22,7 +22,7 @@ class UserProfile {
     _userID = value;
   }
 
-  addPicture(Picture PicToAdd) {
+  addPicture(UserImage PicToAdd) {
     pictureList.add(PicToAdd);
   }
 }
