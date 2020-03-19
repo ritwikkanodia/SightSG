@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'Boundary/LoginUI.dart';
 import 'Boundary/HomePageUI.dart';
 import 'Boundary/SelectionUI.dart';
+import 'Boundary/ImageSelectionUI.dart';
+import 'Control/ConverterController.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ImageToTextConverterApp());
 
 //void main() => runApp(
 //      MaterialApp(
