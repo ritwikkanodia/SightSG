@@ -32,6 +32,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   child: ListTile(
+
                     leading: Icon(
                       Icons.camera_alt,
                       size: 40,
