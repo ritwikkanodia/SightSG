@@ -15,17 +15,17 @@ class ImageApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   UserImage _selectedFile;
   bool _inProcess = false;
   final FirebaseStorage _storage = FirebaseStorage(storageBucket: 'gs://text-detector-9404a.appspot.com');
