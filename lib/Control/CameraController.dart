@@ -7,6 +7,7 @@ import '../Entity/UserImage.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import '../Control/UploadingController.dart';
 
 class ImageController {
   ImageController();
@@ -30,6 +31,7 @@ class ImageController {
       if (cropped != null) {
         _selectedFile = UserImage(cropped);
       }
+      // uploadPicture(_selectedFile);
 
     }
 }
