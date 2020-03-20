@@ -1,7 +1,7 @@
 import 'package:assignment_app/Boundary/NavigationUI.dart';
 import 'package:flutter/material.dart';
 import '../Control/LoginValidator.dart';
-import '../Boundary/FirstScreenUI.dart';
+// import '../Boundary/FirstScreenUI.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -52,17 +52,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                'Sign in with Google',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
-                ),
-              ),
-            )
+            Image(image: AssetImage("assets/google_logo.png"), height: 35.0)
           ],
         ),
       ),
