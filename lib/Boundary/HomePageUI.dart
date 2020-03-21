@@ -191,7 +191,7 @@ class _MyHomePageState extends State<HomePage> {
               (_inProcess)
                   ? Container(
                       color: Colors.white,
-                      height: h * 0.95,
+                      height: h * 90,
                       child: Center(
                         child: CircularProgressIndicator(),
                       ),
