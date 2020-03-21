@@ -11,30 +11,7 @@ import '../Control/UploadingController.dart';
 
 class ImageController {
   ImageController();
-  static getImage(ImageSource source, UserImage _selectedFile) async {
-    File image = await ImagePicker.pickImage(source: source);
 
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          ));
-
-      if (cropped != null) {
-        _selectedFile = UserImage(cropped);
-      }
-      // uploadPicture(_selectedFile);
-
-    }
-}
   static Widget getImageWidget(UserImage selectedFile) {
     if (selectedFile != null) {
       return Image.file(
