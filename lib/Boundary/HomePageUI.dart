@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:assignment_app/size_config.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import '../Entity/UserImage.dart';
+import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Control/CameraController.dart';
 import 'dart:io';
+import 'package:path/path.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +19,28 @@ class _MyHomePageState extends State<HomePage> {
   bool _inProcess = false;
   File selectedImage;
 
+  /*
+  Future uploadPicture(BuildContext context) async{ // Function needs image parameter, or move function to where the image is being clicked and stored
+    String filename = basename(selectedImage.path);
+    StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(filename);
+    StorageUploadTask uploadTask = firebaseStorageRef.putFile(selectedImage); // Once user clicks a picture, that picture, needs to be sent through the function as a parameter
+    // You can convert a Uint8List to a Flutter Image widget using the Image.memory constructor. (Use the Uint8List.fromList constructor to convert a List to Uint8List if necessary.) You can use BASE64.encode to go the other way.
+    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+    print("Image has been uploaded");
+  }
+  */
+
+  uploadFile(File file) async {
+    String fileName = basename(file.path);
+    final FirebaseStorage _storage = FirebaseStorage(storageBucket: 'gs://se-assignment-b4462.appspot.com');
+    final StorageReference storageReference = _storage.ref().child("$fileName.jpg");
+    final StorageUploadTask uploadTask = storageReference.putFile(file);
+    //storageReference.
+    final StorageTaskSnapshot downloadUrl = (await uploadTask.onComplete);
+    final String url = (await downloadUrl.ref.getDownloadURL());
+    print("URL is $url");
+  }
+
   getImage(ImageSource source) async {
     this.setState(() {
       _inProcess = true;
@@ -25,6 +50,7 @@ class _MyHomePageState extends State<HomePage> {
       this.setState(() {
         _inProcess = false;
         selectedImage = croppedImage;
+        uploadFile(selectedImage);
       });
     }
   }
