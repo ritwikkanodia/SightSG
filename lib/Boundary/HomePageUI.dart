@@ -1,3 +1,4 @@
+import 'package:assignment_app/Boundary/SelectionUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment_app/size_config.dart';
@@ -32,8 +33,10 @@ class _MyHomePageState extends State<HomePage> {
 
   uploadFile(File file) async {
     String fileName = basename(file.path);
-    final FirebaseStorage _storage = FirebaseStorage(storageBucket: 'gs://se-assignment-b4462.appspot.com');
-    final StorageReference storageReference = _storage.ref().child("$fileName.jpg");
+    final FirebaseStorage _storage =
+        FirebaseStorage(storageBucket: 'gs://se-assignment-b4462.appspot.com');
+    final StorageReference storageReference =
+        _storage.ref().child("$fileName.jpg");
     final StorageUploadTask uploadTask = storageReference.putFile(file);
     //storageReference.
     final StorageTaskSnapshot downloadUrl = (await uploadTask.onComplete);
@@ -47,11 +50,21 @@ class _MyHomePageState extends State<HomePage> {
     });
     File croppedImage = await ImageController.getCroppedImage(source);
     if (croppedImage != null) {
-      this.setState(() {
-        _inProcess = false;
-        selectedImage = croppedImage;
-        uploadFile(selectedImage);
-      });
+      this.setState(
+        () {
+          _inProcess = false;
+          selectedImage = croppedImage;
+          uploadFile(selectedImage);
+        },
+      );
+      Navigator.push(
+        this.context,
+        MaterialPageRoute(
+          builder: (context) => SelectionPage(
+            pic: croppedImage,
+          ),
+        ),
+      );
     }
   }
 
@@ -177,12 +190,12 @@ class _MyHomePageState extends State<HomePage> {
               ),
               (_inProcess)
                   ? Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height * 0.95,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
+                      color: Colors.white,
+                      height: h * 0.95,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
                   : Center()
             ],
           )),

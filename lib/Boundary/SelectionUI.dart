@@ -1,10 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'dart:io';
+import 'package:assignment_app/size_config.dart';
 
 class SelectionPage extends StatelessWidget {
+  final File pic;
+  SelectionPage({
+    Key key,
+    @required this.pic,
+  }); //: super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    final double h = SizeConfig.blockSizeVertical;
+    final double w = SizeConfig.blockSizeHorizontal;
+
     return Scaffold(
         appBar: GradientAppBar(
           centerTitle: true,
@@ -16,25 +28,40 @@ class SelectionPage extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 100),
+          padding: const EdgeInsets.only(top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Expanded(
+                child: Container(
+                    width: h * 40,
+                    height: h * 40,
+                    decoration: new BoxDecoration(
+                      image: new DecorationImage(
+                        image: FileImage(pic),
+                        fit: BoxFit.contain,
+                      ),
+                    )),
+              ),
+              SizedBox(
+                height: h * 3,
+              ),
               Text(
                 'Convert To:',
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: h * 5,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
                 ),
               ),
               SizedBox(
-                height: 60,
+                height: h * 3,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 55),
+                padding: EdgeInsets.symmetric(horizontal: h * 8),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: h * 6, vertical: w * 3),
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.all(
@@ -52,7 +79,7 @@ class SelectionPage extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontSize: 25,
+                        fontSize: h * 4,
                       ),
                     ),
                     onTap: () {
@@ -62,9 +89,11 @@ class SelectionPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(55.0),
+                padding:
+                    EdgeInsets.symmetric(horizontal: h * 8, vertical: (h * 5)),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: h * 6, vertical: w * 3),
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.all(
@@ -82,7 +111,7 @@ class SelectionPage extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontSize: 25,
+                        fontSize: h * 4,
                       ),
                     ),
                     onTap: () {
