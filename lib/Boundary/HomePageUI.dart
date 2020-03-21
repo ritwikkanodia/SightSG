@@ -14,6 +14,8 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
   bool _inProcess = false;
+  File selectedImage;
+
   getImage(ImageSource source) async {
     this.setState(() {
       _inProcess = true;
@@ -22,6 +24,7 @@ class _MyHomePageState extends State<HomePage> {
     if (croppedImage != null) {
       this.setState(() {
         _inProcess = false;
+        selectedImage = croppedImage;
       });
     }
   }
