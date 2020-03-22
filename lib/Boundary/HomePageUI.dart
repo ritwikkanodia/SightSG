@@ -73,7 +73,6 @@ class _MyHomePageState extends State<HomePage> {
     SizeConfig().init(context);
     final double h = SizeConfig.blockSizeVertical;
     final double w = SizeConfig.blockSizeHorizontal;
-
     return SafeArea(
       child: Scaffold(
           appBar: GradientAppBar(
