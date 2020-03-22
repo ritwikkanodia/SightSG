@@ -1,7 +1,9 @@
 import 'package:assignment_app/Boundary/NavigationUI.dart';
+
 import 'package:flutter/material.dart';
 import '../Control/LoginValidator.dart';
 // import '../Boundary/FirstScreenUI.dart';
+import 'dart:io';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  List<Color> _colors = [Colors.blue, Colors.purpleAccent];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +22,36 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlutterLogo(size: 150),
+              Container(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Icon(
+                      Icons.camera,
+                      size: 80,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Sight',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: _colors),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ),
+              //   FlutterLogo(size: 150),
               SizedBox(height: 50),
               _signInButton(),
             ],
@@ -43,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
           );
         });
       },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       highlightElevation: 0,
       borderSide: BorderSide(color: Colors.grey),
       child: Padding(
