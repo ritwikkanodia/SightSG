@@ -1,129 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-//import 'dart:async';
-//import 'dart:typed_data';
-//import 'dart:ui';
-//
-//import 'package:camera/camera.dart';
-//import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-//import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audio_cache.dart';
 
-//class ScannerUtils {
-//  ScannerUtils._();
-//
-//  static Future<CameraDescription> getCamera(CameraLensDirection dir) async {
-//    return await availableCameras().then(
-//          (List<CameraDescription> cameras) => cameras.firstWhere(
-//            (CameraDescription camera) => camera.lensDirection == dir,
-//      ),
-//    );
-//  }
-//
-//  static Future<dynamic> detect({
-//    @required CameraImage image,
-//    @required Future<dynamic> Function(FirebaseVisionImage image) detectInImage,
-//    @required int imageRotation,
-//  }) async {
-//    return detectInImage(
-//      FirebaseVisionImage.fromBytes(
-//        _concatenatePlanes(image.planes),
-//        _buildMetaData(image, _rotationIntToImageRotation(imageRotation)),
-//      ),
-//    );
-//  }
-//
-//  static Uint8List _concatenatePlanes(List<Plane> planes) {
-//    final WriteBuffer allBytes = WriteBuffer();
-//    for (Plane plane in planes) {
-//      allBytes.putUint8List(plane.bytes);
-//    }
-//    return allBytes.done().buffer.asUint8List();
-//  }
-//
-//  static FirebaseVisionImageMetadata _buildMetaData(
-//      CameraImage image,
-//      ImageRotation rotation,
-//      ) {
-//    return FirebaseVisionImageMetadata(
-//      rawFormat: image.format.raw,
-//      size: Size(image.width.toDouble(), image.height.toDouble()),
-//      rotation: rotation,
-//      planeData: image.planes.map(
-//            (Plane plane) {
-//          return FirebaseVisionImagePlaneMetadata(
-//            bytesPerRow: plane.bytesPerRow,
-//            height: plane.height,
-//            width: plane.width,
-//          );
-//        },
-//      ).toList(),
-//    );
-//  }
-//
-//  static ImageRotation _rotationIntToImageRotation(int rotation) {
-//    switch (rotation) {
-//      case 0:
-//        return ImageRotation.rotation0;
-//      case 90:
-//        return ImageRotation.rotation90;
-//      case 180:
-//        return ImageRotation.rotation180;
-//      default:
-//        assert(rotation == 270);
-//        return ImageRotation.rotation270;
-//    }
-//  }
-//}
-//class CameraController extends Camera{
-//  CameraController _camera;
-//
-//  @override
-//  void initState() {
-//    super.initState();
-//    _initializeCamera();
-//  }
-//
-//  void _initializeCamera() async {
-//    final CameraDescription description =
-//    await ScannerUtils.getCamera(_direction);
-//
-//    _camera = CameraController(
-//      description,
-//      ResolutionPreset.high,
-//    );
-//
-//    await _camera.initialize();
-//
-//    _camera.startImageStream((CameraImage image) {
-//
-//      // Here we will scan the text from the image
-//      // which we are getting from the camera.
-//
-//    });
-//  }
-//}
-
-
-class TextToAudioConverter{
-  TextToAudioConverter();
-
-  File convertImgToAudio(File image){
-    //Calling API to convert
-  }
-}
-
-class ImageToColorConverter{
-  ImageToColorConverter();
-
-  File convertImgToColor(File image){
-    //Calling API to convert
-    return image;
-  }
-}
-
-class ImageToTextConverterApp extends StatelessWidget {
+class ImageToTextConverterApp extends StatelessWidget {//For testing purposes
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -133,16 +18,18 @@ class ImageToTextConverterApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatefulWidget {//For testing purposes
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> { //For testing purposes
   File pickedImage;
 
   bool isImageLoaded = false;
-
+  AudioCache audioCache = AudioCache();
+  AudioPlayer advancedPlayer = AudioPlayer();
+  String audioUrl;
   Future pickImage() async {
     var tempStore = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -159,14 +46,20 @@ class _MyHomePageState extends State<MyHomePage> {
     VisionText readText = await recognizeText.processImage(ourImage);
     List listOfBlock = [];
     for (TextBlock block in readText.blocks) { //Print all the text at console
-      var stringBuffer = StringBuffer();
+      String concatenatedString = "";
       for (TextLine line in block.lines) {
         for (TextElement word in line.elements) {
-          stringBuffer.writeln(word.text);
+          concatenatedString += word.toString();
+          if (concatenatedString.length > 700) {
+            listOfBlock.add(concatenatedString);
+            concatenatedString = "";
+          }
         }
       }
-      listOfBlock.add(stringBuffer.toString());
+      if (concatenatedString.length >= 500)
+        listOfBlock.add(concatenatedString);
     }
+    print(listOfBlock);
     return listOfBlock;
   }
 
@@ -180,6 +73,53 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  String testingString = "This is to test whether the API works.";
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+
+  Future makePostRequest() async {
+    var auth = 'chean koh:Ck991011.';
+    var bytes = utf8.encode(auth);
+    var convertedAuth = base64.encode(bytes);
+    final finalAuth = 'Basic ' + convertedAuth;
+    final uri = 'https://www.de-vis-software.ro/tts.aspx';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': finalAuth
+    };
+    Map<String, dynamic> body = {
+      "inputtext": testingString,
+      "ssml": "Text",
+      "voicename": "en-US-PREMIUM-C_FEMALE",
+      "voicetype": "HeadPhones",
+      "encoding": "Mp3",
+      "speed": 1,
+      "pitch": 0,
+      "volume": 0,
+      "saveFileLocally": "Yes"
+    };
+    String jsonBody = json.encode(body);
+
+    Response response = await post(
+        uri,
+        headers: headers,
+        body: jsonBody
+    );
+
+    if (response.statusCode == 200) {
+      var jsonResponse = await json.decode(response.body);
+      audioUrl = jsonResponse['audioFileURL'];
+      print(audioUrl);
+    }
+    else {
+      print(response.statusCode);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -207,10 +147,96 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: readText,
             ),
             RaisedButton(
-              child: Text('Read Bar Code'),
-              onPressed: decode,
-            )
+              child: Text('Get Mp3'),
+              onPressed: makePostRequest,
+            ),
+            _Btn(
+                txt: 'Play', onPressed: () => advancedPlayer.setUrl(audioUrl)
+            ),
           ],
         ));
+  }
+}
+
+class _Btn extends StatelessWidget {
+  final String txt;
+  final VoidCallback onPressed;
+
+  const _Btn({Key key, this.txt, this.onPressed}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ButtonTheme(
+        minWidth: 48.0,
+        child: RaisedButton(child: Text(txt), onPressed: onPressed));
+  }
+}
+
+
+class ConverterController { //The one to interact with UI
+  Future<List<String>> ImageToTextConverter(File pickedImage) async{
+    FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+    TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
+    VisionText readText = await recognizeText.processImage(ourImage);
+    List<String> listOfBlock = [];
+    for (TextBlock block in readText.blocks) { //Print all the text at console
+      String concatenatedString = "";
+      for (TextLine line in block.lines) {
+        for (TextElement word in line.elements) {
+          concatenatedString += word.toString();
+        }
+      }
+      listOfBlock.add(concatenatedString);
+    }
+    return listOfBlock;
+  }
+
+  Future<String> TextToSpeechConverter(File pickedImage) async{
+    List<String> convertedText = await ImageToTextConverter(pickedImage);
+    String finalConcatenatedString = "";
+    for (String i in convertedText){
+      finalConcatenatedString += i;
+    }
+    if (finalConcatenatedString.length>=700){
+      print("Sorry, the texts in the image exceeds 700 characters, please use another image.");
+    }
+    else{
+      var auth = 'chean koh:Ck991011.';
+      var bytes = utf8.encode(auth);
+      var convertedAuth = base64.encode(bytes);
+      final finalAuth = 'Basic ' + convertedAuth;
+      final uri = 'https://www.de-vis-software.ro/tts.aspx';
+      final headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': finalAuth
+      };
+      Map<String, dynamic> body = {
+        "inputtext": finalConcatenatedString,
+        "ssml": "Text",
+        "voicename": "en-US-PREMIUM-C_FEMALE",
+        "voicetype": "HeadPhones",
+        "encoding": "Mp3",
+        "speed": 1,
+        "pitch": 0,
+        "volume": 0,
+        "saveFileLocally": "Yes"
+      };
+      String jsonBody = json.encode(body);
+
+      Response response = await post(
+          uri,
+          headers: headers,
+          body: jsonBody
+      );
+
+      if (response.statusCode == 200) {
+        var jsonResponse = await json.decode(response.body);
+        print(jsonResponse['audioFileURL']);
+      }
+      else {
+        print(response.statusCode);
+      }
+    }
   }
 }
