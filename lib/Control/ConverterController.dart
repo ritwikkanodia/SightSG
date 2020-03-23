@@ -153,6 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<List> readText() async {
+    //FirebaseVisionImage.f
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
     VisionText readText = await recognizeText.processImage(ourImage);

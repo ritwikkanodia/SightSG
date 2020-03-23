@@ -1,13 +1,13 @@
+import 'package:assignment_app/Boundary/TextResultUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:io';
 import 'package:assignment_app/size_config.dart';
-
+import '../Control/ArchiveController.dart';
 class SelectionPage extends StatelessWidget {
   final File pic;
   SelectionPage({
-    Key key,
     @required this.pic,
   }); //: super(key: key);
 
@@ -116,6 +116,45 @@ class SelectionPage extends StatelessWidget {
                     ),
                     onTap: () {
                       print('abc');
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                EdgeInsets.symmetric(horizontal: h * 8, vertical: (h * 5)),
+                child: Container(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: h * 6, vertical: w * 3),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.text_fields,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      'Upload',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: h * 4,
+                      ),
+                    ),
+                    onTap: () {
+                      //ArchiveController.uploadPicture(pic);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TextResultUI(
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),
