@@ -1,6 +1,5 @@
-import 'package:assignment_app/Boundary/FirstScreenUI.dart';
+import 'package:assignment_app/Boundary/UserProfileUI.dart';
 import 'package:assignment_app/Boundary/HomePageUI.dart';
-import 'package:assignment_app/Boundary/ProfileUI.dart';
 import 'package:assignment_app/Boundary/TextResultUI.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ class _NavigationState extends State<Navigation> {
 
   final List<Widget> _children = [
     HomePage(), TextResultUI(),
-    FirstScreen() // create the pages you want to navigate between
+    UserProfileUI() // create the pages you want to navigate between
   ];
 
   Widget build(BuildContext context) {

@@ -1,15 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../Entity/UserProfile.dart';
 
-String name;
-String email;
-String imageUrl;
-String uid;
+UserProfile userProfile = new UserProfile();
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
-
-
 
 Future<String> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -27,13 +23,15 @@ Future<String> signInWithGoogle() async {
   assert(user.email != null);
   assert(user.displayName != null);
   assert(user.photoUrl != null);
-  name = user.displayName;
-  email = user.email;
-  imageUrl = user.photoUrl;
-  uid = user.uid;
 
-  if (name.contains(" ")) {
-    name = name.substring(0, name.indexOf(" "));
+  userProfile.setUserID(user.uid);
+  userProfile.setUserMail(user.email);
+  userProfile.setUserName(user.displayName);
+  userProfile.setUserDisplay(user.photoUrl);
+
+  if (userProfile.getUserName().contains(" ")) {
+    String name = userProfile.getUserName().substring(0, userProfile.getUserName().indexOf(" "));
+    userProfile.setUserName(name);
   }
 
   assert(!user.isAnonymous);

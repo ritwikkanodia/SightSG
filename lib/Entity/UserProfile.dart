@@ -1,28 +1,39 @@
 import 'UserImage.dart';
 
 class UserProfile {
-  int _userID;
-  String _userName;
-  List<UserImage> pictureList = [];
+  String _ID;
+  String _Name;
+  String _Mail;
+  String _Display;
 
-  UserProfile(int ID, String Name) {
-    this._userID = ID;
-    this._userName = Name;
+  UserProfile(){
+    this._ID = null;
+    this._Name = null;
+    this._Mail = null;
+    this._Display = null;
   }
 
-  String getUserName() => _userName;
+  String getUserName() => _Name;
 
   setUserName(String value) {
-    _userName = value;
+    this._Name = value;
   }
 
-  int getUserID() => _userID;
+  String getUserID() => _ID;
 
-  setUserID(int value) {
-    _userID = value;
+  setUserID(String value) {
+    this._ID = value;
   }
 
-  addPicture(UserImage PicToAdd) {
-    pictureList.add(PicToAdd);
+  String getUserDisplay() => _Display;
+
+  setUserDisplay(String url){
+    this._Display = url;
+  }
+
+  String getUserMail() => _Mail;
+
+  setUserMail(String mail){
+    this._Mail = mail;
   }
 }

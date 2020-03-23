@@ -1,9 +1,6 @@
 import 'package:assignment_app/Boundary/NavigationUI.dart';
-
 import 'package:flutter/material.dart';
 import '../Control/LoginValidator.dart';
-// import '../Boundary/FirstScreenUI.dart';
-import 'dart:io';
 
 class LoginPage extends StatefulWidget {
   @override
