@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:assignment_app/Boundary/AudioResultUI.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
@@ -115,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> { //For testing purposes
       var jsonResponse = await json.decode(response.body);
       audioUrl = jsonResponse['audioFileURL'];
       print(audioUrl);
+      return audioUrl;
     }
     else {
       print(response.statusCode);
@@ -148,7 +150,18 @@ class _MyHomePageState extends State<MyHomePage> { //For testing purposes
             ),
             RaisedButton(
               child: Text('Get Mp3'),
-              onPressed: makePostRequest,
+              onPressed: () {
+                String ur  = makePostRequest().toString();
+                print('Here is the new url');
+                //String ur = 'https://ffpoazure.blob.core.windows.net/chean-koh/chean-koh.mp3';
+                print(ur);
+                //So i think navigator.push happening before makePostRequest
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>AudioResult(demoUrl: ur),),
+                );
+              }
+
             ),
             _Btn(
                 txt: 'Play', onPressed: () => advancedPlayer.setUrl(audioUrl)
@@ -174,6 +187,7 @@ class _Btn extends StatelessWidget {
 
 
 class ConverterController { //The one to interact with UI
+  // ignore: non_constant_identifier_names
   Future<List<String>> ImageToTextConverter(File pickedImage) async{
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
@@ -191,6 +205,7 @@ class ConverterController { //The one to interact with UI
     return listOfBlock;
   }
 
+  // ignore: non_constant_identifier_names
   Future<String> TextToSpeechConverter(File pickedImage) async{
     List<String> convertedText = await ImageToTextConverter(pickedImage);
     String finalConcatenatedString = "";

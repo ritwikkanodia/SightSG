@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import '../Control/ArchiveController.dart';
 
+// ignore: camel_case_types
 class ArchiveUI_2 extends StatefulWidget {
   @override
   _ArchiveUI_2State createState() => _ArchiveUI_2State();
 }
 
+// ignore: camel_case_types
 class _ArchiveUI_2State extends State<ArchiveUI_2> {
   List _images;
   int _imgLength;
