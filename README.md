@@ -1,4 +1,4 @@
-# SE-Application
+# SightSG :camera:
 
 1. Sign in works. (can add more types of log ins, phone number, github etc.)
 2. Implementation of the APIs.
