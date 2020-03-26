@@ -22,7 +22,7 @@ class UserProfileUI extends StatelessWidget {
             children: <Widget>[
               CircleAvatar(
                 backgroundImage: NetworkImage(
-                    'https://hips.hearstapps.com/ghk.h-cdn.co/assets/17/30/pembroke-welsh-corgi.jpg'),
+                    userProfile.getUserDisplay()),
                 radius: 60,
                 backgroundColor: Colors.transparent,
               ),
@@ -35,7 +35,7 @@ class UserProfileUI extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                'name',
+                userProfile.getUserName(),
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.deepPurple,
@@ -50,7 +50,7 @@ class UserProfileUI extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                'email',
+                userProfile.getUserMail(),
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.deepPurple,
