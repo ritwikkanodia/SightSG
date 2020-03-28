@@ -10,13 +10,12 @@ final GoogleSignIn googleSignIn = GoogleSignIn();
 Future<String> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   final GoogleSignInAuthentication googleSignInAuthentication =
-  await googleSignInAccount.authentication;
+      await googleSignInAccount.authentication;
 
   final AuthCredential credential = GoogleAuthProvider.getCredential(
     accessToken: googleSignInAuthentication.accessToken,
     idToken: googleSignInAuthentication.idToken,
   );
-
 
   final AuthResult authResult = await _auth.signInWithCredential(credential);
   final FirebaseUser user = authResult.user;
@@ -30,7 +29,9 @@ Future<String> signInWithGoogle() async {
   userProfile.setUserDisplay(user.photoUrl);
 
   if (userProfile.getUserName().contains(" ")) {
-    String name = userProfile.getUserName().substring(0, userProfile.getUserName().indexOf(" "));
+    String name = userProfile
+        .getUserName()
+        .substring(0, userProfile.getUserName().indexOf(" "));
     userProfile.setUserName(name);
   }
 
@@ -44,7 +45,7 @@ Future<String> signInWithGoogle() async {
   return 'signInWithGoogle succeeded: $user';
 }
 
-void signOutGoogle() async{
+void signOutGoogle() async {
   await googleSignIn.signOut();
 
   print("User Sign Out");

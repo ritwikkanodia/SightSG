@@ -81,7 +81,17 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 35.0)
+            Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Sign In',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 30,
+              ),
+            ),
           ],
         ),
       ),

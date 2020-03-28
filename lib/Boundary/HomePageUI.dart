@@ -78,128 +78,142 @@ class _MyHomePageState extends State<HomePage> {
           appBar: GradientAppBar(
             centerTitle: true,
             backgroundColorStart: Colors.blue,
-            backgroundColorEnd: Colors.green,
+            backgroundColorEnd: Colors.blueGrey[300],
             title: Text(
               'Sight',
               style: (TextStyle(fontSize: (h * 4))),
             ),
           ),
-          body: Stack(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: h * 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: w * 15),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: w * 3, vertical: h * 3),
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(h * 10),
-                          ),
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.camera_alt,
-                            size: h * 5,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Take Photo',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: h * 3,
-                            ),
-                          ),
-                          onTap: () {
-                            getImage(ImageSource.camera);
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(55.0),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: w * 3, vertical: 3 * h),
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(h * 10),
-                          ),
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.photo_library,
-                            size: h * 5,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Browse Gallery',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: h * 3,
-                            ),
-                          ),
-                          onTap: () {
-                            getImage(ImageSource.gallery);
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 55),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 3 * w, vertical: 3 * h),
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(h * 10),
-                          ),
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.cloud,
-                            size: h * 5,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Archived Photos',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: h * 3,
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ArchiveUI_2(),),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.blue[100], Colors.blue],
               ),
-              (_inProcess)
-                  ? Container(
-                      color: Colors.white,
-                      height: h * 90,
-                      child: Center(
-                        child: CircularProgressIndicator(),
+            ),
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(top: h * 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: w * 15),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: w * 3, vertical: h * 3),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 5),
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(h * 10),
+                            ),
+                          ),
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.camera_alt,
+                              size: h * 5,
+                              color: Colors.white,
+                            ),
+                            title: Text(
+                              'Take Photo',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: h * 3,
+                              ),
+                            ),
+                            onTap: () {
+                              getImage(ImageSource.camera);
+                            },
+                          ),
+                        ),
                       ),
-                    )
-                  : Center()
-            ],
+                      Padding(
+                        padding: const EdgeInsets.all(55.0),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: w * 3, vertical: 3 * h),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 5),
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(h * 10),
+                            ),
+                          ),
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.photo_library,
+                              size: h * 5,
+                              color: Colors.white,
+                            ),
+                            title: Text(
+                              'Browse Gallery',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: h * 3,
+                              ),
+                            ),
+                            onTap: () {
+                              getImage(ImageSource.gallery);
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 55),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 3 * w, vertical: 3 * h),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 5),
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(h * 10),
+                            ),
+                          ),
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.cloud,
+                              size: h * 5,
+                              color: Colors.white,
+                            ),
+                            title: Text(
+                              'Archived Photos',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: h * 3,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ArchiveUI_2(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                (_inProcess)
+                    ? Container(
+                        color: Colors.white,
+                        height: h * 90,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : Center()
+              ],
+            ),
           )),
     );
   }

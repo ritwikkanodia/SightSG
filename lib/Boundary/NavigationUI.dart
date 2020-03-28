@@ -3,7 +3,7 @@ import 'package:assignment_app/Boundary/HomePageUI.dart';
 import 'package:assignment_app/Boundary/TextResultUI.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:assignment_app/Boundary/InfoUI.dart';
 //class Nav extends StatelessWidget {
 //  @override
 //  Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _NavigationState extends State<Navigation> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    HomePage(), TextResultUI(),
+    HomePage(), InfoUI(),
     UserProfileUI() // create the pages you want to navigate between
   ];
 
@@ -36,7 +36,7 @@ class _NavigationState extends State<Navigation> {
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue[400],
         animationCurve: Curves.bounceInOut,
         animationDuration: Duration(milliseconds: 200),
         items: <Widget>[
