@@ -38,7 +38,7 @@ class ConverterController { //The one to interact with UI
    * Represents an API call method of Text To Speech
    * @author Koh Zhuang Chean
    */
-  Future TextToSpeechConverter(File pickedImage) async{
+  Future<String> TextToSpeechConverter(File pickedImage) async{
     List<String> convertedText = await ImageToTextConverter(pickedImage);
     String finalConcatenatedString = "";
     for (String i in convertedText){
@@ -83,6 +83,7 @@ class ConverterController { //The one to interact with UI
       else {
         print(response.statusCode);
       }
+      return json.decode(response.body)['audioFileURL'];
     }
   }
 }
