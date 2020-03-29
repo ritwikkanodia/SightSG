@@ -87,7 +87,8 @@ class ConverterController {
       else {
         print(response.statusCode);
       }
-      return json.decode(response.body)['audioFileURL'];
+      var jsonResponse = await json.decode(response.body);
+      return jsonResponse['audioFileURL'];
     }
   }
 
