@@ -48,7 +48,7 @@ class ConverterController { //The one to interact with UI
       print("Sorry, the texts in the image exceeds 700 characters, please use another image.");
     }
     else{
-      var auth = 'chean koh:Ck991011.';
+      var auth = 'caz koh:Cazkoh99!';
       var bytes = utf8.encode(auth);
       var convertedAuth = base64.encode(bytes);
       final finalAuth = 'Basic ' + convertedAuth;
