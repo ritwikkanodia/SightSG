@@ -1,10 +1,15 @@
+import 'package:assignment_app/Boundary/AudioResultUI.dart';
 import 'package:assignment_app/Boundary/TextResultUI.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:assignment_app/Boundary/AudioResultUI.dart';
 import 'dart:io';
 import 'package:assignment_app/size_config.dart';
 import '../Control/ArchiveController.dart';
+import '../Control/ConverterController.dart';
+
 class SelectionPage extends StatelessWidget {
   final File pic;
   SelectionPage({
@@ -82,8 +87,18 @@ class SelectionPage extends StatelessWidget {
                         fontSize: h * 4,
                       ),
                     ),
-                    onTap: () {
+                    onTap: () async {
                       print('abc');
+
+                      ConverterController textToSpeech = new ConverterController();
+                      String url = await textToSpeech.TextToSpeechConverter(pic);
+                      //String url= 'https://ffpoazure.blob.core.windows.net/chean-koh/chean-koh.mp3';
+                      print(url);
+                      Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AudioResult(demoUrl: url),),
+                  );
+
                     },
                   ),
                 ),

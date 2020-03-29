@@ -13,12 +13,13 @@ import 'package:http/http.dart';
  * Class in charge of API call
  * @author Koh Zhuang Chean
  */
-class ConverterController { //The one to interact with UI
+class ConverterController {
+  //The one to interact with UI
   /**
    * Represents an API call method of Image To Text
    * @author Koh Zhuang Chean
    */
-  Future<List<String>> ImageToTextConverter(File pickedImage) async{
+  Future<List<String>> ImageToTextConverter(File pickedImage) async {
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
     VisionText readText = await recognizeText.processImage(ourImage);
@@ -34,20 +35,23 @@ class ConverterController { //The one to interact with UI
     }
     return listOfBlock;
   }
+
   /**
    * Represents an API call method of Text To Speech
    * @author Koh Zhuang Chean
    */
-  Future<String> TextToSpeechConverter(File pickedImage) async{
+  // ignore: non_constant_identifier_names
+  Future<String> TextToSpeechConverter(File pickedImage) async {
     List<String> convertedText = await ImageToTextConverter(pickedImage);
     String finalConcatenatedString = "";
-    for (String i in convertedText){
+    for (String i in convertedText) {
       finalConcatenatedString += i;
     }
-    if (finalConcatenatedString.length>=700){
-      print("Sorry, the texts in the image exceeds 700 characters, please use another image.");
+    if (finalConcatenatedString.length >= 700) {
+      print(
+          "Sorry, the texts in the image exceeds 700 characters, please use another image.");
     }
-    else{
+    else {
       var auth = 'caz koh:Cazkoh99!';
       var bytes = utf8.encode(auth);
       var convertedAuth = base64.encode(bytes);
@@ -78,7 +82,7 @@ class ConverterController { //The one to interact with UI
       );
 
       if (response.statusCode == 200) {
-          print("API call success");
+        print("API call success");
       }
       else {
         print(response.statusCode);
@@ -86,7 +90,15 @@ class ConverterController { //The one to interact with UI
       return json.decode(response.body)['audioFileURL'];
     }
   }
+
 }
+  // ignore: non_constant_identifier_names
+//  Future<String> CallAudioConverter(File pickedImage) async {
+//   Future<String> url = (await TextToSpeechConverter(pickedImage)) as Future<String>;
+//   return url;
+//  }
+
+
 //
 //class ImageToTextConverterApp extends StatelessWidget {//For testing purposes
 //  @override
