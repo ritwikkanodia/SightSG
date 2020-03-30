@@ -99,7 +99,7 @@ class SelectionPage extends StatelessWidget {
                         ConverterController textToSpeech =
                             new ConverterController();
                         String convertedText =
-                            await textToSpeech.ImageToTextConverter(pic);
+                            await textToSpeech.ImageToTextConverterForTts(pic);
                         //String url= 'https://ffpoazure.blob.core.windows.net/chean-koh/chean-koh.mp3';
                         print(convertedText);
                         Navigator.push(
@@ -144,7 +144,7 @@ class SelectionPage extends StatelessWidget {
                         ConverterController imageToText =
                             new ConverterController();
                         String convertedText =
-                            await imageToText.ImageToTextConverter(pic);
+                            await imageToText.ImageToTextConverterForTts(pic);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
