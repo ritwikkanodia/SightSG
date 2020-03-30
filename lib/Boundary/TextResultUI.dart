@@ -168,6 +168,7 @@ class _TextResultState extends State<TextResult> {
                     await pr.show();
                     await ArchiveController.uploadPicture(pic);
                     pr.hide();
+                    showDialogBox(h);
                   },
                 ),
               ),
@@ -209,5 +210,33 @@ class _TextResultState extends State<TextResult> {
         ),
       ),
     );
+  }
+
+  Future showDialogBox(double h) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          Future.delayed(Duration(seconds: 2), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+              title: Text("Upload to archive"),
+              content: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.cloud_done,
+                    color: Colors.lightBlue,
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                    width: 10.0,
+                  ),
+                  Text(
+                    "Upload completed!",
+                    style: (TextStyle(fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ));
+        });
   }
 }

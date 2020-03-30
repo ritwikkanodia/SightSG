@@ -7,7 +7,7 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:io';
 import 'package:assignment_app/size_config.dart';
 import '../Control/ArchiveController.dart';
-import '../Control/ConverterController.dart';
+import '../Control/ImageToTextController.dart';
 
 class SelectionPage extends StatelessWidget {
   final File pic;
@@ -102,10 +102,10 @@ class SelectionPage extends StatelessWidget {
                           ),
                           onTap: () async {
                             print('Running text to speech...');
-                            ConverterController textToSpeech =
-                                new ConverterController();
+                            ImageToTextController textToSpeech =
+                                new ImageToTextController();
                             String convertedText =
-                                await textToSpeech.ImageToTextConverterForTts(
+                                await textToSpeech.imageToTextConverterForTts(
                                     pic);
                             //String url= 'https://ffpoazure.blob.core.windows.net/chean-koh/chean-koh.mp3';
                             print(convertedText);
@@ -152,8 +152,8 @@ class SelectionPage extends StatelessWidget {
                           ),
                           onTap: () async {
                             print('Running image to text...');
-                            ConverterController imageToText =
-                                new ConverterController();
+                            ImageToTextController imageToText =
+                                new ImageToTextController();
                             List<String> convertedText =
                                 await imageToText.ImageToTextConverter(pic);
                             Navigator.push(

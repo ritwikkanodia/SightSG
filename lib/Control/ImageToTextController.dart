@@ -1,13 +1,13 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-import 'package:http/http.dart';
+//import 'package:http/http.dart';
+//import 'dart:convert';
 
 /**
  * Class in charge of API call
  * @author Koh Zhuang Chean
  */
-class ConverterController {
+class ImageToTextController {
   //The one to interact with UI
   /**
    * Represents an API call method of Image To Text
@@ -30,7 +30,7 @@ class ConverterController {
     return listOfBlock;
   }
 
-  Future<String> ImageToTextConverterForTts(File pickedImage) async {
+  Future<String> imageToTextConverterForTts(File pickedImage) async {
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
     VisionText readText = await recognizeText.processImage(ourImage);
@@ -54,58 +54,54 @@ class ConverterController {
     return finalConcatenatedString;
   }
 
-  /**
-   * Represents an API call method of Text To Speech
-   * @author Koh Zhuang Chean
-   */
   // ignore: non_constant_identifier_names
-  Future<String> TextToSpeechConverter(File pickedImage) async {
-    String convertedText = await ImageToTextConverterForTts(pickedImage);
-
-    if (convertedText.length >= 700) {
-      print(
-          "Sorry, the texts in the image exceeds 700 characters, please use another image.");
-    }
-    else {
-      var auth = 'tammy lim:Tammylim9!';
-      var bytes = utf8.encode(auth);
-      var convertedAuth = base64.encode(bytes);
-      final finalAuth = 'Basic ' + convertedAuth;
-      final uri = 'https://www.de-vis-software.ro/tts.aspx';
-      final headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': finalAuth
-      };
-      Map<String, dynamic> body = {
-        "inputtext": convertedText,
-        "ssml": "Text",
-        "voicename": "en-US-PREMIUM-C_FEMALE",
-        "voicetype": "HeadPhones",
-        "encoding": "Mp3",
-        "speed": 1,
-        "pitch": 0,
-        "volume": 0,
-        "saveFileLocally": "Yes"
-      };
-      String jsonBody = json.encode(body);
-      Response response = await post(
-          uri,
-          headers: headers,
-          body: jsonBody
-      );
-
-      if (response.statusCode == 200) {
-        print("API call success");
-      }
-      else {
-        print(response.statusCode);
-      }
-      var jsonResponse = await json.decode(response.body);
-      print(response);
-      return jsonResponse['audioFileURL'];
-    }
-  }
+//  Future<String> TextToSpeechConverter(File pickedImage) async {
+//    String convertedText = await ImageToTextConverterForTts(pickedImage);
+//
+//    if (convertedText.length >= 700) {
+//      print(
+//          "Sorry, the texts in the image exceeds 700 characters, please use another image.");
+//    }
+//    else {
+//      var auth = 'tammy lim:Tammylim9!';
+//      var bytes = utf8.encode(auth);
+//      var convertedAuth = base64.encode(bytes);
+//      final finalAuth = 'Basic ' + convertedAuth;
+//      final uri = 'https://www.de-vis-software.ro/tts.aspx';
+//      final headers = {
+//        'Content-Type': 'application/json',
+//        'Accept': 'application/json',
+//        'Authorization': finalAuth
+//      };
+//      Map<String, dynamic> body = {
+//        "inputtext": convertedText,
+//        "ssml": "Text",
+//        "voicename": "en-US-PREMIUM-C_FEMALE",
+//        "voicetype": "HeadPhones",
+//        "encoding": "Mp3",
+//        "speed": 1,
+//        "pitch": 0,
+//        "volume": 0,
+//        "saveFileLocally": "Yes"
+//      };
+//      String jsonBody = json.encode(body);
+//      Response response = await post(
+//          uri,
+//          headers: headers,
+//          body: jsonBody
+//      );
+//
+//      if (response.statusCode == 200) {
+//        print("API call success");
+//      }
+//      else {
+//        print(response.statusCode);
+//      }
+//      var jsonResponse = await json.decode(response.body);
+//      print(response);
+//      return jsonResponse['audioFileURL'];
+//    }
+//  }
 
 }
   // ignore: non_constant_identifier_names
