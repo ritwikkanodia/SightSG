@@ -83,7 +83,7 @@ class InfoUI extends StatelessWidget {
                         color: Colors.white,
                         onPressed: () {
                           _ackAlert(context, 'Instruction',
-                              'Step 1: Select an image to be processed via Camera/Gallery/Archieve. \n\nStep 2: Select image to be converted to Audio/Text \n\nStep 3: Result will be displayed within 2 seconds \n\n');
+                              'Step 1: Select an image to be processed via Camera/Gallery/Archieve. \n\nStep 2: Select image to be converted to Audio/Text. \n\nStep 3: Result will be displayed within 2 seconds. \n\nStep 4: Upload to cloud archieve if needed.');
                         },
                       ),
                     ),
