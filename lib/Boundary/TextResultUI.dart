@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import '../size_config.dart';
 import '../Control/ArchiveController.dart';
 import 'package:assignment_app/Boundary/HomePageUI.dart';
@@ -37,6 +38,19 @@ class _TextResultState extends State<TextResult> {
     SizeConfig().init(context);
     final double h = SizeConfig.blockSizeVertical;
     final double w = SizeConfig.blockSizeHorizontal;
+    ProgressDialog pr = new ProgressDialog(context, type: ProgressDialogType.Normal, isDismissible: true);
+
+    pr.style(
+        message: 'Uploading file...',
+        backgroundColor: Colors.white,
+        progressWidget: CircularProgressIndicator(),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInOut,
+        progressTextStyle: TextStyle(
+            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+        messageTextStyle: TextStyle(
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: GradientAppBar(
@@ -157,8 +171,10 @@ class _TextResultState extends State<TextResult> {
                       fontSize: h * 3,
                     ),
                   ),
-                  onTap: () {
-                    ArchiveController.uploadPicture(pic);
+                  onTap: () async {
+                    await pr.show();
+                    await ArchiveController.uploadPicture(pic);
+                    pr.hide();
                   },
                 ),
               ),

@@ -156,45 +156,6 @@ class SelectionPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: h * 8, vertical: (h * 5)),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: h * 6, vertical: w * 3),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.text_fields,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        'Upload',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: h * 4,
-                        ),
-                      ),
-                      onTap: () {
-//                      ArchiveController.uploadPicture(pic);
-//                      Navigator.push(
-//                        context,
-//                        MaterialPageRoute(
-//                          builder: (context) => TextResultUI(
-//                          ),
-//                        ),
-//                      );
-                      },
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

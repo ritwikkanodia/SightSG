@@ -157,7 +157,7 @@ class _AudioResultState extends State<AudioResult> {
                         onTap: () async {
                           await pr.show();
                           await uploadImage();
-
+                          pr.hide();
                         },
                       ),
                     ),
@@ -197,15 +197,6 @@ class _AudioResultState extends State<AudioResult> {
                       ),
                     ),
                   ),
-                  (_isUploading)
-                      ? Container(
-                    color: Colors.white,
-                    height: h * 90,
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
-                      : Center()
                 ],
               ),
             ), //
