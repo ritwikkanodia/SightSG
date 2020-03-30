@@ -128,8 +128,8 @@ class _AudioResultState extends State<AudioResult> {
                       height: h * 50,
                       decoration: new BoxDecoration(
                         image: new DecorationImage(
-                          image: FileImage(pic),
-                          fit: BoxFit.fitHeight,
+                          image: AssetImage('images/5.jpeg'), //FileImage(pic),
+                          fit: BoxFit.contain,
                         ),
                       )),
                   Padding(

@@ -80,7 +80,7 @@ class _TextResultState extends State<TextResult> {
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
                       image: FileImage(pic),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                     ),
                   )),
               Divider(
