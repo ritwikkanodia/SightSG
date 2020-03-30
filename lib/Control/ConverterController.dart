@@ -13,7 +13,24 @@ class ConverterController {
    * Represents an API call method of Image To Text
    * @author Koh Zhuang Chean
    */
-  Future<String> ImageToTextConverter(File pickedImage) async {
+  Future<List<String>> ImageToTextConverter(File pickedImage) async {
+    FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+    TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
+    VisionText readText = await recognizeText.processImage(ourImage);
+    List<String> listOfBlock = [];
+    for (TextBlock block in readText.blocks) { //Print all the text at console
+      String concatenatedString = "";
+      for (TextLine line in block.lines) {
+        for (TextElement word in line.elements) {
+          concatenatedString = concatenatedString + word.text + ' ';
+        }
+      }
+      listOfBlock.add(concatenatedString);
+    }
+    return listOfBlock;
+  }
+
+  Future<String> ImageToTextConverterForTts(File pickedImage) async {
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
     VisionText readText = await recognizeText.processImage(ourImage);
@@ -43,7 +60,7 @@ class ConverterController {
    */
   // ignore: non_constant_identifier_names
   Future<String> TextToSpeechConverter(File pickedImage) async {
-    String convertedText = await ImageToTextConverter(pickedImage);
+    String convertedText = await ImageToTextConverterForTts(pickedImage);
 
     if (convertedText.length >= 700) {
       print(
