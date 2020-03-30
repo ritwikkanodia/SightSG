@@ -175,7 +175,7 @@ class _MyHomePageState extends State<HomePage> {
                               color: Colors.white,
                             ),
                             title: Text(
-                              'Archived Photos',
+                              'Browse Archive',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
