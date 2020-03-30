@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:assignment_app/size_config.dart';
 import '../Control/ArchiveController.dart';
 import '../Control/ImageToTextController.dart';
+import 'MainButton.dart';
 
 class SelectionPage extends StatelessWidget {
   final File pic;
@@ -20,6 +21,40 @@ class SelectionPage extends StatelessWidget {
     SizeConfig().init(context);
     final double h = SizeConfig.blockSizeVertical;
     final double w = SizeConfig.blockSizeHorizontal;
+
+    Future imageToAudio() async {
+      print('Running text to speech...');
+      ImageToTextController textToSpeech =
+      new ImageToTextController();
+      String convertedText =
+      await textToSpeech.imageToTextConverterForTts(
+          pic);
+      print(convertedText);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AudioResult(
+              convertedText: convertedText,
+              pic: this.pic),
+        ),
+      );
+    }
+
+    Future imageToText() async {
+      print('Running image to text...');
+      ImageToTextController imageToText =
+      new ImageToTextController();
+      List<String> convertedText =
+      await imageToText.ImageToTextConverter(pic);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TextResult(
+              convertedText: convertedText,
+              pic: this.pic),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: GradientAppBar(
@@ -74,100 +109,11 @@ class SelectionPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: w * 15),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: w * 3, vertical: h * 3),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 5),
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(h * 10),
-                          ),
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.camera_alt,
-                            size: h * 5,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Audio',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: h * 3,
-                            ),
-                          ),
-                          onTap: () async {
-                            print('Running text to speech...');
-                            ImageToTextController textToSpeech =
-                                new ImageToTextController();
-                            String convertedText =
-                                await textToSpeech.imageToTextConverterForTts(
-                                    pic);
-                            //String url= 'https://ffpoazure.blob.core.windows.net/chean-koh/chean-koh.mp3';
-                            print(convertedText);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AudioResult(
-                                    convertedText: convertedText,
-                                    pic: this.pic),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
+                    mainButton(w,h,Icons.music_note,"Audio",imageToAudio, EdgeInsets.symmetric(horizontal: w * 15)),
                     SizedBox(
                       height: w * 5,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: w * 15),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: w * 3, vertical: h * 3),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 5),
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(h * 10),
-                          ),
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.camera_alt,
-                            size: h * 5,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            'Text',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: h * 3,
-                            ),
-                          ),
-                          onTap: () async {
-                            print('Running image to text...');
-                            ImageToTextController imageToText =
-                                new ImageToTextController();
-                            List<String> convertedText =
-                                await imageToText.ImageToTextConverter(pic);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TextResult(
-                                    convertedText: convertedText,
-                                    pic: this.pic),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
+                    mainButton(w, h, Icons.format_color_text, "Text", imageToText, EdgeInsets.symmetric(horizontal: w * 15)),
                     SizedBox(
                       height: w * 5,
                     )

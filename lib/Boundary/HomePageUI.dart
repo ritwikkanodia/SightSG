@@ -1,3 +1,4 @@
+import 'package:assignment_app/Boundary/MainButton.dart';
 import 'package:assignment_app/Boundary/SelectionUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,24 @@ class _MyHomePageState extends State<HomePage> {
     SizeConfig().init(context);
     final double h = SizeConfig.blockSizeVertical;
     final double w = SizeConfig.blockSizeHorizontal;
+
+    getImageFromCamera() {
+      getImage(ImageSource.camera);
+    }
+
+    getImageFromGallery() {
+      getImage(ImageSource.gallery);
+    }
+
+    goToArchive () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ArchiveUI(),
+        ),
+      );
+    }
+
     return SafeArea(
       child: Scaffold(
           appBar: GradientAppBar(
@@ -92,107 +111,9 @@ class _MyHomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: w * 15),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: w * 3, vertical: h * 3),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 5),
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(h * 10),
-                            ),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.camera_alt,
-                              size: h * 5,
-                              color: Colors.white,
-                            ),
-                            title: Text(
-                              'Take Photo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: h * 3,
-                              ),
-                            ),
-                            onTap: () {
-                              getImage(ImageSource.camera);
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(55.0),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: w * 3, vertical: 3 * h),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 5),
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(h * 10),
-                            ),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.photo_library,
-                              size: h * 5,
-                              color: Colors.white,
-                            ),
-                            title: Text(
-                              'Browse Gallery',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: h * 3,
-                              ),
-                            ),
-                            onTap: () {
-                              getImage(ImageSource.gallery);
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 55),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 3 * w, vertical: 3 * h),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 5),
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(h * 10),
-                            ),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.cloud,
-                              size: h * 5,
-                              color: Colors.white,
-                            ),
-                            title: Text(
-                              'Browse Archive',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: h * 3,
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ArchiveUI(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
+                      mainButton(w, h, Icons.camera_alt, "Take Photo", getImageFromCamera, EdgeInsets.symmetric(horizontal: 55)),
+                      mainButton(w, h, Icons.photo_library, "Browse Gallery", getImageFromGallery , EdgeInsets.all(55.0)),
+                      mainButton(w, h, Icons.cloud, "Browse Archive", goToArchive , EdgeInsets.symmetric(horizontal: 55)),
                     ],
                   ),
                 ),

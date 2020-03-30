@@ -8,6 +8,7 @@ import '../size_config.dart';
 import '../Control/ArchiveController.dart';
 import 'package:assignment_app/Boundary/HomePageUI.dart';
 import '../Boundary/NavigationUI.dart';
+import 'MainButton.dart';
 
 void main() => runApp(MaterialApp(
       home:
@@ -51,6 +52,22 @@ class _TextResultState extends State<TextResult> {
             color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
         messageTextStyle: TextStyle(
             color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
+
+    goToNavigation () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Navigation()),
+      );
+    }
+
+    uploadToArchive() async {
+      await pr.show();
+      await ArchiveController.uploadPicture(pic);
+      pr.hide();
+      showDialogBox(h);
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: GradientAppBar(
@@ -139,72 +156,8 @@ class _TextResultState extends State<TextResult> {
                   ),
                 ],
               ),
-              SizedBox(height: w * 10),
-              Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: w * 3, vertical: 3 * h),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 5),
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(h * 10),
-                  ),
-                ),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.cloud,
-                    size: h * 5,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Upload to Archive',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: h * 3,
-                    ),
-                  ),
-                  onTap: () async {
-                    await pr.show();
-                    await ArchiveController.uploadPicture(pic);
-                    pr.hide();
-                    showDialogBox(h);
-                  },
-                ),
-              ),
-              SizedBox(height: w * 10),
-              Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 3 * w, vertical: 3 * h),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 5),
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(h * 10),
-                  ),
-                ),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.home,
-                    size: h * 5,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Home',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: h * 3,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Navigation()),
-                    );
-                  },
-                ),
-              ),
+              mainButton(w, h, Icons.cloud, "Upload to Archive", uploadToArchive, EdgeInsets.all(w * 5)),
+              mainButton(w, h, Icons.home, "Home", goToNavigation, EdgeInsets.symmetric(horizontal: w * 5)),
             ],
           ),
         ),

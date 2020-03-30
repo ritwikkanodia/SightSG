@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:assignment_app/Boundary/HomePageUI.dart';
+import 'package:assignment_app/Boundary/MainButton.dart';
 import 'package:assignment_app/Control/AudioController.dart';
 import 'package:assignment_app/size_config.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -102,6 +103,21 @@ class _AudioResultState extends State<AudioResult> {
         messageTextStyle: TextStyle(
             color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
 
+    goToNavigation () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Navigation()),
+      );
+    }
+
+    uploadToArchive() async {
+      await pr.show();
+      await ArchiveController.uploadPicture(pic);
+      pr.hide();
+      showDialogBox(h);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -138,78 +154,8 @@ class _AudioResultState extends State<AudioResult> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         _btnSection(),
-                        Padding(
-                          padding: const EdgeInsets.all(55.0),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: w * 3, vertical: 3 * h),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white, width: 5),
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(h * 10),
-                              ),
-                            ),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.cloud,
-                                size: h * 5,
-                                color: Colors.white,
-                              ),
-                              title: Text(
-                                'Upload to Archive',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: h * 3,
-                                ),
-                              ),
-                              onTap: () async {
-                                await pr.show();
-                                await ArchiveController.uploadPicture(pic);
-                                pr.hide();
-                                showDialogBox(h);
-                              },
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 55),
-                          child: Container(
-                            margin: EdgeInsets.only(bottom: 20),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 3 * w, vertical: 3 * h),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white, width: 5),
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(h * 10),
-                              ),
-                            ),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.home,
-                                size: h * 5,
-                                color: Colors.white,
-                              ),
-                              title: Text(
-                                'Home',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: h * 3,
-                                ),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Navigation()),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
+                        mainButton(w, h, Icons.cloud, "Upload to Archive", uploadToArchive, EdgeInsets.all(w * 5)),
+                        mainButton(w, h, Icons.home, "Home", goToNavigation, EdgeInsets.symmetric(horizontal: w * 5)),
                       ],
                     ),
                   ), //
@@ -256,12 +202,14 @@ class _AudioResultState extends State<AudioResult> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: Colors.white70),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          _buildButtonColumn(Colors.green, Colors.greenAccent, Icons.play_arrow,
-              'PLAY', AudioController.playAudio),
-          _buildButtonColumn(Colors.red, Colors.redAccent, Icons.stop, 'STOP',
-              AudioController.stopAudio)
-        ]));
+        child: Material(
+          child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            _buildButtonColumn(Colors.green, Colors.greenAccent, Icons.play_arrow,
+                'PLAY', AudioController.playAudio),
+            _buildButtonColumn(Colors.red, Colors.redAccent, Icons.stop, 'STOP',
+                AudioController.stopAudio)
+          ]),
+        ));
   }
 
   Container _buildButtonColumn(Color color, Color splashColor, IconData icon,
