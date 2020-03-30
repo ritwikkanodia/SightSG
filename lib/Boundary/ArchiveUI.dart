@@ -6,13 +6,13 @@ import 'package:uuid/uuid.dart';
 import '../Control/ArchiveController.dart';
 
 // ignore: camel_case_types
-class ArchiveUI_2 extends StatefulWidget {
+class ArchiveUI extends StatefulWidget {
   @override
-  _ArchiveUI_2State createState() => _ArchiveUI_2State();
+  _ArchiveUIState createState() => _ArchiveUIState();
 }
 
 // ignore: camel_case_types
-class _ArchiveUI_2State extends State<ArchiveUI_2> {
+class _ArchiveUIState extends State<ArchiveUI> {
   List _images;
   int _imgLength;
 
@@ -33,25 +33,31 @@ class _ArchiveUI_2State extends State<ArchiveUI_2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: Text(
-            'Your Archive',
-            style: (TextStyle(fontWeight: FontWeight.bold)),
-          ),
-          centerTitle: true,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(
+          'Your Archive',
+          style: (TextStyle(fontWeight: FontWeight.bold)),
         ),
-        body: _imgLength == null ? new Container(
-          color: Colors.white,
-          child: Center(
-            child: CircularProgressIndicator(),
-            )
-          )
-            : new GridView.extent(
-          maxCrossAxisExtent: 250.0,
-          children: _buildGridTiles(_images.length, context, _images), // new function to be defined
-        ),
+        centerTitle: true,
+      ),
+      body: _imgLength == null
+          ? new Container(
+              color: Colors.white,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ))
+          : _imgLength == 0
+              ? Center(
+                  child: Text("The archive is empty",
+                    style: (TextStyle(fontWeight: FontWeight.bold)),),
+                )
+              : new GridView.extent(
+                  maxCrossAxisExtent: 250.0,
+                  children: _buildGridTiles(_images.length, context,
+                      _images), // new function to be defined
+                ),
     );
   }
 }
@@ -71,16 +77,19 @@ File saveBytesToTempDirectory(Uint8List bytes) {
 
 List<Widget> _buildGridTiles(numOfTiles, BuildContext context, List images) {
   List<Container> containers =
-    new List<Container>.generate(numOfTiles, (int index) {
+      new List<Container>.generate(numOfTiles, (int index) {
     //final imageName = 'images/${index + 1}.jpeg';
     return new Container(
       child: FlatButton(
         child: Image.memory(images[index]),
         onPressed: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SelectionPage(pic: saveBytesToTempDirectory(images[index])))//MemoryImage(images[index],))),
-          );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SelectionPage(
+                      pic: saveBytesToTempDirectory(
+                          images[index]))) //MemoryImage(images[index],))),
+              );
         },
       ),
     );

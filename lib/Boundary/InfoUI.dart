@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Boundary/LoginUI.dart';
-import '../Control/LoginValidator.dart';
 import 'package:assignment_app/size_config.dart';
 
 class InfoUI extends StatelessWidget {

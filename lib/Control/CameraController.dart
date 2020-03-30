@@ -9,9 +9,17 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../Control/ArchiveController.dart';
 
+/**
+ * Controller class to obtain image from the user.
+ * @author Alexander Lim Hong Xun
+ */
 class ImageController {
   ImageController();
 
+  /**
+   * Displays image or placeholder depending if an image is uploaded to the application
+   * @author Alexander Lim Hong Xun
+   */
   static Widget getImageWidget(UserImage selectedFile) {
     if (selectedFile != null) {
       return Image.file(
@@ -30,6 +38,10 @@ class ImageController {
     }
   }
 
+  /**
+   * Retrieves a cropped imagefrom the user
+   * @author Alexander Lim Hong Xun
+   */
   static Future<File> getCroppedImage (ImageSource source) async {
     File image = await ImagePicker.pickImage(source: source);
     if (image != null) {

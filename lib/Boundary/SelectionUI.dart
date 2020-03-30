@@ -1,10 +1,9 @@
-import 'package:assignment_app/Boundary/AudioResultUI.dart';
-import 'package:assignment_app/Boundary/TextResultUI.dart';
+import '../Boundary/AudioResultUI.dart';
+import '../Boundary/TextResultUI.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-//import 'package:assignment_app/Boundary/AudioResultUI.dart';
 import 'dart:io';
 import 'package:assignment_app/size_config.dart';
 import '../Control/ArchiveController.dart';
@@ -88,15 +87,14 @@ class SelectionPage extends StatelessWidget {
                       ),
                     ),
                     onTap: () async {
-                      print('abc');
-
+                      print('Running text to speech...');
                       ConverterController textToSpeech = new ConverterController();
-                      String url = await textToSpeech.TextToSpeechConverter(pic);
+                      String convertedText = await textToSpeech.ImageToTextConverter(pic);
                       //String url= 'https://ffpoazure.blob.core.windows.net/chean-koh/chean-koh.mp3';
-                      print(url);
+                      print(convertedText);
                       Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AudioResult(demoUrl: url),),
+                    MaterialPageRoute(builder: (context) => AudioResult(convertedText: convertedText, pic: this.pic),),
                   );
 
                     },
@@ -129,8 +127,14 @@ class SelectionPage extends StatelessWidget {
                         fontSize: h * 4,
                       ),
                     ),
-                    onTap: () {
-                      print('abc');
+                    onTap: () async {
+                      print('Running image to text...');
+                      ConverterController imageToText = new ConverterController();
+                      String converted_text = await imageToText.ImageToTextConverter(pic);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TextResult(),),
+                      );
                     },
                   ),
                 ),
@@ -162,14 +166,14 @@ class SelectionPage extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      //ArchiveController.uploadPicture(pic);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TextResultUI(
-                          ),
-                        ),
-                      );
+//                      ArchiveController.uploadPicture(pic);
+//                      Navigator.push(
+//                        context,
+//                        MaterialPageRoute(
+//                          builder: (context) => TextResultUI(
+//                          ),
+//                        ),
+//                      );
                     },
                   ),
                 ),

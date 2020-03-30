@@ -2,12 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:http/http.dart';
-//import 'package:assignment_app/Boundary/AudioResultUI.dart';
-//import 'package:flutter/material.dart';
-//import 'package:image_picker/image_picker.dart';
-//import 'package:path_provider/path_provider.dart';
-//import 'package:audioplayers/audioplayers.dart';
-//import 'package:audioplayers/audio_cache.dart';
 
 /**
  * Class in charge of API call
@@ -19,7 +13,7 @@ class ConverterController {
    * Represents an API call method of Image To Text
    * @author Koh Zhuang Chean
    */
-  Future<List<String>> ImageToTextConverter(File pickedImage) async {
+  Future<String> ImageToTextConverter(File pickedImage) async {
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
     VisionText readText = await recognizeText.processImage(ourImage);
@@ -28,12 +22,19 @@ class ConverterController {
       String concatenatedString = "";
       for (TextLine line in block.lines) {
         for (TextElement word in line.elements) {
-          concatenatedString += word.toString();
+          concatenatedString += word.text;
         }
       }
       listOfBlock.add(concatenatedString);
     }
-    return listOfBlock;
+
+    String finalConcatenatedString = "";
+
+    for (String i in listOfBlock) {
+      finalConcatenatedString += i;
+      print(i);
+    }
+    return finalConcatenatedString;
   }
 
   /**
@@ -42,17 +43,14 @@ class ConverterController {
    */
   // ignore: non_constant_identifier_names
   Future<String> TextToSpeechConverter(File pickedImage) async {
-    List<String> convertedText = await ImageToTextConverter(pickedImage);
-    String finalConcatenatedString = "";
-    for (String i in convertedText) {
-      finalConcatenatedString += i;
-    }
-    if (finalConcatenatedString.length >= 700) {
+    String convertedText = await ImageToTextConverter(pickedImage);
+
+    if (convertedText.length >= 700) {
       print(
           "Sorry, the texts in the image exceeds 700 characters, please use another image.");
     }
     else {
-      var auth = 'caz koh:Cazkoh99!';
+      var auth = 'tammy lim:Tammylim9!';
       var bytes = utf8.encode(auth);
       var convertedAuth = base64.encode(bytes);
       final finalAuth = 'Basic ' + convertedAuth;
@@ -63,7 +61,7 @@ class ConverterController {
         'Authorization': finalAuth
       };
       Map<String, dynamic> body = {
-        "inputtext": finalConcatenatedString,
+        "inputtext": convertedText,
         "ssml": "Text",
         "voicename": "en-US-PREMIUM-C_FEMALE",
         "voicetype": "HeadPhones",
@@ -74,7 +72,6 @@ class ConverterController {
         "saveFileLocally": "Yes"
       };
       String jsonBody = json.encode(body);
-
       Response response = await post(
           uri,
           headers: headers,
@@ -88,6 +85,7 @@ class ConverterController {
         print(response.statusCode);
       }
       var jsonResponse = await json.decode(response.body);
+      print(response);
       return jsonResponse['audioFileURL'];
     }
   }

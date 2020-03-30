@@ -3,14 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment_app/size_config.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import '../Entity/UserImage.dart';
-import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Control/CameraController.dart';
 import 'dart:io';
 import 'package:path/path.dart';
-import 'ArchiveUI_2.dart';
+import 'ArchiveUI.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,17 +18,6 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage> {
   bool _inProcess = false;
   File selectedImage;
-
-  /*
-  Future uploadPicture(BuildContext context) async{ // Function needs image parameter, or move function to where the image is being clicked and stored
-    String filename = basename(selectedImage.path);
-    StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(filename);
-    StorageUploadTask uploadTask = firebaseStorageRef.putFile(selectedImage); // Once user clicks a picture, that picture, needs to be sent through the function as a parameter
-    // You can convert a Uint8List to a Flutter Image widget using the Image.memory constructor. (Use the Uint8List.fromList constructor to convert a List to Uint8List if necessary.) You can use BASE64.encode to go the other way.
-    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
-    print("Image has been uploaded");
-  }
-  */
 
   uploadFile(File file) async {
     String fileName = basename(file.path);
@@ -65,6 +52,12 @@ class _MyHomePageState extends State<HomePage> {
           ),
         ),
       );
+    } else {
+      this.setState(
+            () {
+          _inProcess = false;
+        },
+      );
     }
   }
 
@@ -78,7 +71,7 @@ class _MyHomePageState extends State<HomePage> {
           appBar: GradientAppBar(
             centerTitle: true,
             backgroundColorStart: Colors.blue,
-            backgroundColorEnd: Colors.blueGrey[300],
+            backgroundColorEnd: Colors.green,
             title: Text(
               'Sight',
               style: (TextStyle(fontSize: (h * 4))),
@@ -193,7 +186,7 @@ class _MyHomePageState extends State<HomePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ArchiveUI_2(),
+                                  builder: (context) => ArchiveUI(),
                                 ),
                               );
                             },
