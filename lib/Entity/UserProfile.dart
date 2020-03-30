@@ -1,10 +1,9 @@
-import 'UserImage.dart';
-
 class UserProfile {
   String _ID;
   String _Name;
   String _Mail;
   String _Display;
+
 
   UserProfile(){
     this._ID = null;
