@@ -13,7 +13,6 @@ void main() => runApp(MaterialApp(
       home:
           TextResult(), //Determines what is gonna show on the home screen of our app
     ));
-
 //Lets create a stateless widget which will return a widget tree which will show on our home page
 
 class TextResult extends StatefulWidget {
@@ -84,7 +83,6 @@ class _TextResultState extends State<TextResult> {
                       fit: BoxFit.fill,
                     ),
                   )),
-
               Divider(
                 height: 10.0, //Height of space above and below divider
                 color: Colors.blue,
