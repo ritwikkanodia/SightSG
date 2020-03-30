@@ -22,7 +22,7 @@ class AudioResult extends StatefulWidget {
 class _AudioResultState extends State<AudioResult> {
   final File pic;
   final String convertedText;
-  FlutterTts flutterTts;
+  FlutterTts flutterTts = FlutterTts();
 
   _AudioResultState(this.convertedText, this.pic);
 
