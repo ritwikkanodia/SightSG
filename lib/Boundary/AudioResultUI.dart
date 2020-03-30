@@ -8,7 +8,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter/material.dart';
 import '../Control/ArchiveController.dart';
-
+import '../Boundary/NavigationUI.dart';
 
 // ignore: must_be_immutable
 class AudioResult extends StatefulWidget {
@@ -79,24 +79,24 @@ class _AudioResultState extends State<AudioResult> {
   }
 
   uploadImage() async {
-    this.setState((){
+    this.setState(() {
       this._isUploading = true;
     });
 
     await ArchiveController.uploadPicture(pic);
 
-    this.setState((){
+    this.setState(() {
       this._isUploading = false;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final double h = SizeConfig.blockSizeVertical;
     final double w = SizeConfig.blockSizeHorizontal;
-    ProgressDialog pr = new ProgressDialog(context, type: ProgressDialogType.Normal, isDismissible: true);
+    ProgressDialog pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: true);
 
     pr.style(
         message: 'Uploading file...',
@@ -107,8 +107,7 @@ class _AudioResultState extends State<AudioResult> {
         progressTextStyle: TextStyle(
             color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
         messageTextStyle: TextStyle(
-            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
-    );
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
 
     return Scaffold(
       appBar: AppBar(
@@ -191,7 +190,8 @@ class _AudioResultState extends State<AudioResult> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(
+                                builder: (context) => Navigation()),
                           );
                         },
                       ),
@@ -204,44 +204,41 @@ class _AudioResultState extends State<AudioResult> {
         ),
       ),
     );
-
   }
 
   Future showDialogBox(double h) {
-    return showDialog(context: context, builder: (context) {
-      return AlertDialog(
-        title: Text("Upload to archive"),
-        content: this._isUploading ? Container(
-          color: Colors.white,
-          height: h * 90,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ):
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Icon(
-                    Icons.cloud_done,
-                    color: Colors.lightBlue,
-                  ),
-                ],
-              )
-            )
-      );
-    });
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Text("Upload to archive"),
+              content: this._isUploading
+                  ? Container(
+                      color: Colors.white,
+                      height: h * 90,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : Container(
+                      child: Column(
+                      children: <Widget>[
+                        Icon(
+                          Icons.cloud_done,
+                          color: Colors.lightBlue,
+                        ),
+                      ],
+                    )));
+        });
   }
 
   Widget _btnSection() {
     return Container(
         padding: EdgeInsets.only(top: 50.0),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          _buildButtonColumn(
-              Colors.green, Colors.greenAccent, Icons.play_arrow, 'PLAY',
-              AudioController.playAudio),
-          _buildButtonColumn(
-              Colors.red, Colors.redAccent, Icons.stop, 'STOP',
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          _buildButtonColumn(Colors.green, Colors.greenAccent, Icons.play_arrow,
+              'PLAY', AudioController.playAudio),
+          _buildButtonColumn(Colors.red, Colors.redAccent, Icons.stop, 'STOP',
               AudioController.stopAudio)
         ]));
   }
@@ -316,7 +313,6 @@ class _AudioResultState extends State<AudioResult> {
 //                  }
 //              );
 //            });
-
 
 //                  Padding(
 //                    padding: EdgeInsets.symmetric(horizontal: w * 15),

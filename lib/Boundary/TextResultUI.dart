@@ -7,6 +7,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import '../size_config.dart';
 import '../Control/ArchiveController.dart';
 import 'package:assignment_app/Boundary/HomePageUI.dart';
+import '../Boundary/NavigationUI.dart';
 
 void main() => runApp(MaterialApp(
       home:
@@ -38,7 +39,8 @@ class _TextResultState extends State<TextResult> {
     SizeConfig().init(context);
     final double h = SizeConfig.blockSizeVertical;
     final double w = SizeConfig.blockSizeHorizontal;
-    ProgressDialog pr = new ProgressDialog(context, type: ProgressDialogType.Normal, isDismissible: true);
+    ProgressDialog pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: true);
 
     pr.style(
         message: 'Uploading file...',
@@ -49,8 +51,7 @@ class _TextResultState extends State<TextResult> {
         progressTextStyle: TextStyle(
             color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
         messageTextStyle: TextStyle(
-            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
-    );
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: GradientAppBar(
@@ -206,7 +207,7 @@ class _TextResultState extends State<TextResult> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (context) => Navigation()),
                     );
                   },
                 ),
