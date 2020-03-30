@@ -15,7 +15,7 @@ void main() => runApp(MaterialApp(
 //Lets create a stateless widget which will return a widget tree which will show on our home page
 
 class TextResult extends StatefulWidget {
-  String convertedText;
+  List<String> convertedText;
   File pic;
 
   TextResult({this.convertedText, this.pic});
@@ -27,11 +27,7 @@ class TextResult extends StatefulWidget {
 class _TextResultState extends State<TextResult> {
   double fontSize = 10.0;
   final File pic;
-  final String convertedText;
-  List<String> test = [
-    "'Please end this meeting'",
-    "'Before my Brain melts'"
-  ]; //The list of string being displayed
+  final List<String> convertedText;
 
   _TextResultState(this.convertedText, this.pic);
 
@@ -41,7 +37,6 @@ class _TextResultState extends State<TextResult> {
     SizeConfig().init(context);
     final double h = SizeConfig.blockSizeVertical;
     final double w = SizeConfig.blockSizeHorizontal;
-    test.add(convertedText);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: GradientAppBar(
@@ -70,7 +65,7 @@ class _TextResultState extends State<TextResult> {
                   height: h * 50,
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
-                      image: AssetImage("images/3.jpeg"),
+                      image: FileImage(pic),
                       fit: BoxFit.fill,
                     ),
                   )),
@@ -91,10 +86,10 @@ class _TextResultState extends State<TextResult> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    for (var i in test)
+                    for (String i in convertedText)
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text('$i',
                               style: TextStyle(

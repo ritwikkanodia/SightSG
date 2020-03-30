@@ -143,8 +143,8 @@ class SelectionPage extends StatelessWidget {
                         print('Running image to text...');
                         ConverterController imageToText =
                             new ConverterController();
-                        String convertedText =
-                            await imageToText.ImageToTextConverterForTts(pic);
+                        List<String> convertedText =
+                            await imageToText.ImageToTextConverter(pic);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
