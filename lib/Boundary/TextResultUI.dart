@@ -92,6 +92,7 @@ class _TextResultState extends State<TextResult> {
                       ),
                       SizedBox(height: 10.0),
                       FloatingActionButton(
+                        heroTag: "btn1",
                         onPressed: () {
                           setState(() {
                             fontSize -= 10;

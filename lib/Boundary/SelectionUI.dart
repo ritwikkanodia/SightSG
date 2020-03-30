@@ -130,10 +130,10 @@ class SelectionPage extends StatelessWidget {
                     onTap: () async {
                       print('Running image to text...');
                       ConverterController imageToText = new ConverterController();
-                      String converted_text = await imageToText.ImageToTextConverter(pic);
+                      String convertedText = await imageToText.ImageToTextConverter(pic);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => TextResult(),),
+                        MaterialPageRoute(builder: (context) => TextResult(convertedText: convertedText, pic: this.pic),),
                       );
                     },
                   ),
