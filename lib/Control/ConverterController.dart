@@ -19,7 +19,7 @@ class ConverterController {
     VisionText readText = await recognizeText.processImage(ourImage);
     List<String> listOfBlock = [];
     for (TextBlock block in readText.blocks) { //Print all the text at console
-      String concatenatedString = "";
+      String concatenatedString = " ";
       for (TextLine line in block.lines) {
         for (TextElement word in line.elements) {
           concatenatedString += word.text;
