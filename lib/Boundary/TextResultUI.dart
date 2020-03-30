@@ -84,12 +84,6 @@ class _TextResultState extends State<TextResult> {
                       fit: BoxFit.fill,
                     ),
                   )),
-//                  Image.asset(
-//                  Image.asset(
-//                    'assets/Meme 1 - Please end this meeting.jpg',
-//                    height: 200,
-//                    width: 200,
-//                  ),
 
               Divider(
                 height: 10.0, //Height of space above and below divider

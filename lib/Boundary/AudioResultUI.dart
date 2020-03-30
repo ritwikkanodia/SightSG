@@ -78,25 +78,12 @@ class _AudioResultState extends State<AudioResult> {
     flutterTts.stop();
   }
 
-  uploadImage() async {
-    this.setState(() {
-      this._isUploading = true;
-    });
-
-    await ArchiveController.uploadPicture(pic);
-
-    this.setState(() {
-      this._isUploading = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final double h = SizeConfig.blockSizeVertical;
     final double w = SizeConfig.blockSizeHorizontal;
-    ProgressDialog pr = new ProgressDialog(context,
-        type: ProgressDialogType.Normal, isDismissible: true);
+    ProgressDialog pr = new ProgressDialog(context, type: ProgressDialogType.Normal, isDismissible: true);
 
     pr.style(
         message: 'Uploading file...',
@@ -107,7 +94,8 @@ class _AudioResultState extends State<AudioResult> {
         progressTextStyle: TextStyle(
             color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
         messageTextStyle: TextStyle(
-            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -155,8 +143,9 @@ class _AudioResultState extends State<AudioResult> {
                         ),
                         onTap: () async {
                           await pr.show();
-                          await uploadImage();
+                          await ArchiveController.uploadPicture(pic);
                           pr.hide();
+                          showDialogBox(h);
                         },
                       ),
                     ),
@@ -204,31 +193,34 @@ class _AudioResultState extends State<AudioResult> {
         ),
       ),
     );
+
   }
 
   Future showDialogBox(double h) {
     return showDialog(
         context: context,
         builder: (context) {
+          Future.delayed(Duration(seconds: 2), () {
+            Navigator.of(context).pop(true);
+          });
           return AlertDialog(
               title: Text("Upload to archive"),
-              content: this._isUploading
-                  ? Container(
-                      color: Colors.white,
-                      height: h * 90,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : Container(
-                      child: Column(
-                      children: <Widget>[
-                        Icon(
-                          Icons.cloud_done,
-                          color: Colors.lightBlue,
-                        ),
-                      ],
-                    )));
+              content: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.cloud_done,
+                    color: Colors.lightBlue,
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                    width: 10.0,
+                  ),
+                  Text(
+                    "Upload completed!",
+                    style: (TextStyle(fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ));
         });
   }
 
@@ -313,6 +305,7 @@ class _AudioResultState extends State<AudioResult> {
 //                  }
 //              );
 //            });
+
 
 //                  Padding(
 //                    padding: EdgeInsets.symmetric(horizontal: w * 15),

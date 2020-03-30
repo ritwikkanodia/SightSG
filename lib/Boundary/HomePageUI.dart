@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import '../Control/CameraController.dart';
 import 'dart:io';
 import 'package:path/path.dart';
-import 'ArchiveUIOld.dart';
+import 'ArchiveUI.dart';
 
 class HomePage extends StatefulWidget {
   @override

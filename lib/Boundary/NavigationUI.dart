@@ -4,19 +4,6 @@ import 'package:assignment_app/Boundary/TextResultUI.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment_app/Boundary/InfoUI.dart';
-//class Nav extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      debugShowCheckedModeBanner: false,
-//      title: 'Flutter Demo',
-//      theme: ThemeData(
-//        primarySwatch: Colors.blue,
-//      ),
-//      home: Navigation(),
-//    );
-//  }
-//}
 
 class Navigation extends StatefulWidget {
   @override
