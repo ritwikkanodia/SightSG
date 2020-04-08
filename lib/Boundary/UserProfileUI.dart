@@ -25,7 +25,7 @@ class UserProfileUI extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               CircleAvatar(
-                backgroundImage: NetworkImage(userProfile.getUserDisplay()),
+                backgroundImage: AssetImage("assets/google_logo.png"),//NetworkImage(userProfile.getUserDisplay()),
                 radius: 60,
                 backgroundColor: Colors.transparent,
               ),
@@ -38,7 +38,7 @@ class UserProfileUI extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                userProfile.getUserName(),
+                userProfile.getUserName().toString(),
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.white,
@@ -53,7 +53,7 @@ class UserProfileUI extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                userProfile.getUserMail(),
+                userProfile.getUserMail().toString(),
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.white,
