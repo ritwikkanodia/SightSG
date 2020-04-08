@@ -6,15 +6,14 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import '../size_config.dart';
 import '../Control/ArchiveController.dart';
-import 'package:assignment_app/Boundary/HomePageUI.dart';
 import '../Boundary/NavigationUI.dart';
 import 'MainButton.dart';
 
-void main() => runApp(MaterialApp(
-      home:
-          TextResult(), //Determines what is gonna show on the home screen of our app
-    ));
-//Lets create a stateless widget which will return a widget tree which will show on our home page
+/// User Interface for Test Result. Displays the result text converted from the uploaded image
+/// This UI includes: Uploaded images, Text Result, Zoom in and Zoom out button,Upload button, Home button.
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 
 class TextResult extends StatefulWidget {
   List<String> convertedText;
@@ -29,6 +28,7 @@ class TextResult extends StatefulWidget {
 class _TextResultState extends State<TextResult> {
   double fontSize = 10.0;
   final File pic;
+
   final List<String> convertedText;
 
   _TextResultState(this.convertedText, this.pic);
@@ -53,11 +53,10 @@ class _TextResultState extends State<TextResult> {
         messageTextStyle: TextStyle(
             color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
 
-    goToNavigation () {
+    goToNavigation() {
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => Navigation()),
+        MaterialPageRoute(builder: (context) => Navigation()),
       );
     }
 
@@ -115,7 +114,7 @@ class _TextResultState extends State<TextResult> {
                     for (String i in convertedText)
                       Column(
                         children: <Widget>[
-                          Text('$i',
+                          SelectableText('$i',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: fontSize,
@@ -156,8 +155,10 @@ class _TextResultState extends State<TextResult> {
                   ),
                 ],
               ),
-              mainButton(w, h, Icons.cloud, "Upload to Archive", uploadToArchive, EdgeInsets.all(w * 5)),
-              mainButton(w, h, Icons.home, "Home", goToNavigation, EdgeInsets.symmetric(horizontal: w * 5)),
+              mainButton(w, h, Icons.cloud, "Upload to Archive",
+                  uploadToArchive, EdgeInsets.all(w * 5)),
+              mainButton(w, h, Icons.home, "Home", goToNavigation,
+                  EdgeInsets.symmetric(horizontal: w * 5)),
             ],
           ),
         ),
@@ -165,6 +166,9 @@ class _TextResultState extends State<TextResult> {
     );
   }
 
+  /// This method returns a dialog box to show the upload progress
+  /// @param Nothing.
+  ///  @return a dialog box to show the upload progress
   Future showDialogBox(double h) {
     return showDialog(
         context: context,

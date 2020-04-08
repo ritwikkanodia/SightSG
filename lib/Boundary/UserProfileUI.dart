@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../Boundary/LoginUI.dart';
 import '../Control/LoginValidator.dart';
 
+/// User Interface for User Profile. Displays the user profile.
+/// This UI includes: User name, User email and log out button.
+/// @version 1.0
+/// @since   2020-04-08
 class UserProfileUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

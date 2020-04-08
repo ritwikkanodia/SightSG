@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment_app/size_config.dart';
 
+/// User Interface for Info Page.
+/// This UI includes:  user guide, contact information and version number.
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class InfoUI extends StatelessWidget {
   List<Color> _colors = [Colors.blue, Colors.purpleAccent];
 
@@ -123,6 +128,10 @@ class InfoUI extends StatelessWidget {
   }
 }
 
+/// This method is to display the help texts.
+/// @param title This is the title of the text.
+/// @param contents This is the content of the text.
+/// @return showDialog to show the text.
 Future<void> _ackAlert(BuildContext context, String title, String contents) {
   return showDialog<void>(
     context: context,

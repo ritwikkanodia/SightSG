@@ -2,6 +2,11 @@ import 'package:assignment_app/Boundary/NavigationUI.dart';
 import 'package:flutter/material.dart';
 import '../Control/LoginValidator.dart';
 
+/// User Interface for Login UI. Display the login button and logo.
+/// This UI includes: Login button and logo
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -58,6 +63,9 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  /// This method returns a button for sign in
+  /// @param Nothing
+  /// @return Outline Button
   Widget _signInButton() {
     return OutlineButton(
       splashColor: Colors.grey,

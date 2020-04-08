@@ -11,6 +11,11 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'ArchiveUI.dart';
 
+/// User Interface for Home Page. Displays the main functions of the application.
+/// This UI includes: Take photo, Browse Gallery, Browse Archive.
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class HomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -20,6 +25,9 @@ class _MyHomePageState extends State<HomePage> {
   bool _inProcess = false;
   File selectedImage;
 
+  /// This method uploads a file to the firebase storage
+  /// @param file This is the file to be uploaded
+  ///  @return Nothing
   uploadFile(File file) async {
     String fileName = basename(file.path);
     final FirebaseStorage _storage =
@@ -33,6 +41,9 @@ class _MyHomePageState extends State<HomePage> {
     print("URL is $url");
   }
 
+  /// This method gets an image from a url
+  /// @param source This is the source url
+  ///  @return Nothing
   getImage(ImageSource source) async {
     this.setState(() {
       _inProcess = true;
@@ -55,13 +66,16 @@ class _MyHomePageState extends State<HomePage> {
       );
     } else {
       this.setState(
-            () {
+        () {
           _inProcess = false;
         },
       );
     }
   }
 
+  /// This method gets an image from a url
+  /// @param source This is the source url
+  ///  @return Nothing
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -76,7 +90,7 @@ class _MyHomePageState extends State<HomePage> {
       getImage(ImageSource.gallery);
     }
 
-    goToArchive () {
+    goToArchive() {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -111,9 +125,17 @@ class _MyHomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      mainButton(w, h, Icons.camera_alt, "Take Photo", getImageFromCamera, EdgeInsets.symmetric(horizontal: 55)),
-                      mainButton(w, h, Icons.photo_library, "Browse Gallery", getImageFromGallery , EdgeInsets.all(55.0)),
-                      mainButton(w, h, Icons.cloud, "Browse Archive", goToArchive , EdgeInsets.symmetric(horizontal: 55)),
+                      mainButton(
+                          w,
+                          h,
+                          Icons.camera_alt,
+                          "Take Photo",
+                          getImageFromCamera,
+                          EdgeInsets.symmetric(horizontal: 55)),
+                      mainButton(w, h, Icons.photo_library, "Browse Gallery",
+                          getImageFromGallery, EdgeInsets.all(55.0)),
+                      mainButton(w, h, Icons.cloud, "Browse Archive",
+                          goToArchive, EdgeInsets.symmetric(horizontal: 55)),
                     ],
                   ),
                 ),

@@ -1,15 +1,18 @@
 import '../Boundary/AudioResultUI.dart';
 import '../Boundary/TextResultUI.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:io';
 import 'package:assignment_app/size_config.dart';
-import '../Control/ArchiveController.dart';
 import '../Control/ImageToTextController.dart';
 import 'MainButton.dart';
 
+/// User Interface for Selection Page. Allows user to select whether to convert image to text or audio
+/// This UI includes: Convert to text button, Convert to audio button.
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class SelectionPage extends StatelessWidget {
   final File pic;
   SelectionPage({
@@ -24,34 +27,27 @@ class SelectionPage extends StatelessWidget {
 
     Future imageToAudio() async {
       print('Running text to speech...');
-      ImageToTextController textToSpeech =
-      new ImageToTextController();
-      String convertedText =
-      await textToSpeech.imageToTextConverterForTts(
-          pic);
+      ImageToTextController textToSpeech = new ImageToTextController();
+      String convertedText = await textToSpeech.imageToTextConverterForTts(pic);
       print(convertedText);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => AudioResult(
-              convertedText: convertedText,
-              pic: this.pic),
+          builder: (context) =>
+              AudioResult(convertedText: convertedText, pic: this.pic),
         ),
       );
     }
 
     Future imageToText() async {
       print('Running image to text...');
-      ImageToTextController imageToText =
-      new ImageToTextController();
-      List<String> convertedText =
-      await imageToText.ImageToTextConverter(pic);
+      ImageToTextController imageToText = new ImageToTextController();
+      List<String> convertedText = await imageToText.ImageToTextConverter(pic);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => TextResult(
-              convertedText: convertedText,
-              pic: this.pic),
+          builder: (context) =>
+              TextResult(convertedText: convertedText, pic: this.pic),
         ),
       );
     }
@@ -109,11 +105,13 @@ class SelectionPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    mainButton(w,h,Icons.music_note,"Audio",imageToAudio, EdgeInsets.symmetric(horizontal: w * 15)),
+                    mainButton(w, h, Icons.music_note, "Audio", imageToAudio,
+                        EdgeInsets.symmetric(horizontal: w * 15)),
                     SizedBox(
                       height: w * 5,
                     ),
-                    mainButton(w, h, Icons.format_color_text, "Text", imageToText, EdgeInsets.symmetric(horizontal: w * 15)),
+                    mainButton(w, h, Icons.format_color_text, "Text",
+                        imageToText, EdgeInsets.symmetric(horizontal: w * 15)),
                     SizedBox(
                       height: w * 5,
                     )

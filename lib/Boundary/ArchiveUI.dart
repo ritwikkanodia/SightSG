@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import '../Control/ArchiveController.dart';
 
+/// User Interface for Archive Page. Displays all the images uploaded to archive by the user.
+/// This UI includes: Uploaded images.
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 // ignore: camel_case_types
 class ArchiveUI extends StatefulWidget {
   @override
@@ -44,22 +49,20 @@ class _ArchiveUIState extends State<ArchiveUI> {
         centerTitle: true,
       ),
       body: _imgLength == null
-          ? new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          ? new Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
                   color: Colors.white,
                   child: Center(
                     child: CircularProgressIndicator(),
                   )),
-        SizedBox(
-          height: 10.0,
-          width: 10.0,
-        ),
-        Text(
-          "Downloading images..",
-          style: (TextStyle(fontWeight: FontWeight.bold)),
-        ),
+              SizedBox(
+                height: 10.0,
+                width: 10.0,
+              ),
+              Text(
+                "Downloading images..",
+                style: (TextStyle(fontWeight: FontWeight.bold)),
+              ),
             ])
           : _imgLength == 0
               ? Center(
@@ -77,6 +80,9 @@ class _ArchiveUIState extends State<ArchiveUI> {
   }
 }
 
+/// This method saves bytes to a temporary directory.
+/// @param Uint8List  This is the bytes to be saved.
+/// @return File this is the temporory directory.
 File saveBytesToTempDirectory(Uint8List bytes) {
   String path = Directory.systemTemp.path;
   String uuid = Uuid().v1();
@@ -90,6 +96,12 @@ File saveBytesToTempDirectory(Uint8List bytes) {
   return file;
 }
 
+/// This method builds a list of containers containing tbe uploaded images
+/// @param numofTIles This is the number of images to be displayed
+/// @param images This is the list of images to be displayed.
+/// @param Uint8List  This is the bytes to be saved.
+/// @return List<container> returns list of container containing images
+///
 List<Widget> _buildGridTiles(numOfTiles, BuildContext context, List images) {
   List<Container> containers =
       new List<Container>.generate(numOfTiles, (int index) {

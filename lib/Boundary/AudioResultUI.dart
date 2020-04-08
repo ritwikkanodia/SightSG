@@ -1,21 +1,21 @@
 import 'dart:io';
 
-import 'package:assignment_app/Boundary/HomePageUI.dart';
+
 import 'package:assignment_app/Boundary/MainButton.dart';
 import 'package:assignment_app/Control/AudioController.dart';
 import 'package:assignment_app/size_config.dart';
-import 'package:audioplayers/audioplayers.dart';
+
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter/material.dart';
 import '../Control/ArchiveController.dart';
 import '../Boundary/NavigationUI.dart';
 
-void main() => runApp(MaterialApp(
-      home:
-          AudioResult(), //Determines what is gonna show on the home screen of our app
-    ));
-
+/// User Interface for Audio Result. Outputs the audio of the text contained in the uploaded image.
+/// This UI includes: Uploaded image, Play and stop button for the audio, Upload button, Home button
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 // ignore: must_be_immutable
 class AudioResult extends StatefulWidget {
   String convertedText;
@@ -103,11 +103,10 @@ class _AudioResultState extends State<AudioResult> {
         messageTextStyle: TextStyle(
             color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
 
-    goToNavigation () {
+    goToNavigation() {
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => Navigation()),
+        MaterialPageRoute(builder: (context) => Navigation()),
       );
     }
 
@@ -115,7 +114,7 @@ class _AudioResultState extends State<AudioResult> {
       await pr.show();
       await ArchiveController.uploadPicture(pic);
       pr.hide();
-      showDialogBox(h);
+      showDialogBox();
     }
 
     return Scaffold(
@@ -154,8 +153,10 @@ class _AudioResultState extends State<AudioResult> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         _btnSection(),
-                        mainButton(w, h, Icons.cloud, "Upload to Archive", uploadToArchive, EdgeInsets.all(w * 5)),
-                        mainButton(w, h, Icons.home, "Home", goToNavigation, EdgeInsets.symmetric(horizontal: w * 5)),
+                        mainButton(w, h, Icons.cloud, "Upload to Archive",
+                            uploadToArchive, EdgeInsets.all(w * 5)),
+                        mainButton(w, h, Icons.home, "Home", goToNavigation,
+                            EdgeInsets.symmetric(horizontal: w * 5)),
                       ],
                     ),
                   ), //
@@ -168,7 +169,10 @@ class _AudioResultState extends State<AudioResult> {
     );
   }
 
-  Future showDialogBox(double h) {
+  /// This method returns a dialog box to show the upload progress
+  /// @param Nothing.
+  ///  @return a dialog box to show the upload progress
+  Future showDialogBox() {
     return showDialog(
         context: context,
         builder: (context) {
@@ -196,6 +200,10 @@ class _AudioResultState extends State<AudioResult> {
         });
   }
 
+  /// This method provides a play and stop button for the audio
+  /// @author  Team Superman
+  /// @version 1.0
+  /// @since   2020-04-08
   Widget _btnSection() {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 40),
@@ -203,15 +211,21 @@ class _AudioResultState extends State<AudioResult> {
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: Colors.white70),
         child: Material(
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            _buildButtonColumn(Colors.green, Colors.greenAccent, Icons.play_arrow,
-                'PLAY', AudioController.playAudio),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            _buildButtonColumn(Colors.green, Colors.greenAccent,
+                Icons.play_arrow, 'PLAY', AudioController.playAudio),
             _buildButtonColumn(Colors.red, Colors.redAccent, Icons.stop, 'STOP',
                 AudioController.stopAudio)
           ]),
         ));
   }
 
+  /// This method returns a container containing a button to be pressed
+  ///
+  /// @author  Team Superman
+  /// @version 1.0
+  /// @since   2020-04-08
   Container _buildButtonColumn(Color color, Color splashColor, IconData icon,
       String label, Function func) {
     return Container(
@@ -240,95 +254,3 @@ class _AudioResultState extends State<AudioResult> {
     );
   }
 }
-
-//Center(
-//              child: Row(
-//                children: <Widget>[
-//                  FlatButton(
-//                    padding: const EdgeInsets.symmetric(
-//                        vertical: 100, horizontal: 50),
-//                    child: Image.asset(
-//                      'images/download.jpg',
-//                      height: 125,
-//                      width: 125,
-//                    ),
-//                    onPressed: () {
-//                      print('Code needed here to save to archive');
-//                    },
-//                  ),
-//                  FlatButton(
-//                    padding:
-//                        const EdgeInsets.symmetric(vertical: 75, horizontal: 0),
-//                    child: Image.asset(
-//                      'images/home_button.jpg',
-//                      height: 125,
-//                      width: 125,
-//                    ),
-//                    onPressed: () {
-//                      Navigator.push(
-//                        context,
-//                        MaterialPageRoute(builder: (context) => HomePage()),
-//                      );
-//                    },
-//                  )
-//                ],
-//              ),
-//            ),
-
-// HttpClient client = new HttpClient();
-//            var _downloadData = List<int>();
-//            var fileSave = new File('./audio.mp3');
-//            client.getUrl(Uri.parse(demoUrl))
-//                .then((HttpClientRequest request) {
-//              return request.close();
-//            })
-//                .then((HttpClientResponse response) {
-//              response.listen((d) => _downloadData.addAll(d),
-//                  onDone: () {
-//                    fileSave.writeAsBytes(_downloadData);
-//                  }
-//              );
-//            });
-
-//                  Padding(
-//                    padding: EdgeInsets.symmetric(horizontal: w * 15),
-//                    child: Container(
-//                      padding:
-//                      EdgeInsets.symmetric(horizontal: w * 3, vertical: h * 3),
-//                      decoration: BoxDecoration(
-//                        border: Border.all(color: Colors.white, width: 5),
-//                        color: Colors.blue,
-//                        borderRadius: BorderRadius.all(
-//                          Radius.circular(h * 10),
-//                        ),
-//                      ),
-//                      child: ListTile(
-//                        leading: Icon(
-//                          Icons.play_arrow,
-//                          size: h * 5,
-//                          color: Colors.white,
-//                        ),
-//                        title: Text(
-//                          'Play Audio',
-//                          style: TextStyle(
-//                            fontWeight: FontWeight.bold,
-//                            color: Colors.white,
-//                            fontSize: h * 3,
-//                          ),
-//                        ),
-//                        onTap: () {
-//                          _speak();
-////                          print(demoUrl);
-////                          AudioPlayer audioPlayer = new AudioPlayer();
-////                          AudioPlayer.logEnabled = true;
-////                          play(String s) async {
-////                            int result = await audioPlayer.play(s);
-////                            if (result == 1) {
-////                              print('success');
-////                            }
-////                          }
-////                          play(demoUrl);
-//                        },
-//                      ),
-//                    ),
-//                  ),
