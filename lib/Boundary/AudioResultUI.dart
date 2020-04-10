@@ -33,10 +33,6 @@ class _AudioResultState extends State<AudioResult> {
   final File pic;
   final String convertedText;
 
-  //Archive
-  bool _isUploading = false;
-  bool _isDoneUploading = false;
-
   //Flutter Text to speech
   TtsState ttsState = TtsState.stopped;
   FlutterTts flutterTts = FlutterTts();
