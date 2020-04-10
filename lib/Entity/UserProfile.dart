@@ -1,3 +1,7 @@
+/// Entity class for the user profile
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class UserProfile {
   String _ID;
   String _Name;

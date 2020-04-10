@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+/// Class to retrieve configurations of the mobile phone screen size
 class SizeConfig {
   static MediaQueryData _mediaQueryData;
   static double screenWidth;

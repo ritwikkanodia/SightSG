@@ -3,15 +3,14 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 //import 'package:http/http.dart';
 //import 'dart:convert';
 
-/**
- * Class in charge of API call
- * @author Koh Zhuang Chean
- */
+///Class in charge of API call
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class ImageToTextController {
-  /**
-   * Represents an API call method of Image To Text
-   * @author Koh Zhuang Chean
-   */
+
+  ///Represents an API call method of Image To Text
+  ///@param pickedImage Image selected by the user to be converted to text
   Future<List<String>> ImageToTextConverter(File pickedImage) async {
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
@@ -29,6 +28,8 @@ class ImageToTextController {
     return listOfBlock;
   }
 
+  ///Represents an API call method of Image To Text format suitable for flutter_tts
+  ///@param pickedImage Image selected by the user to be converted to audio
   Future<String> imageToTextConverterForTts(File pickedImage) async {
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();

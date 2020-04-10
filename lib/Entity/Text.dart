@@ -1,3 +1,7 @@
+/// Text entity class
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class Text {
   String _text;
   String _fontStyle;

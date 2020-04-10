@@ -7,17 +7,16 @@ import 'package:path/path.dart' as path;
 import '../Control/LoginValidator.dart';
 import 'DatabaseController.dart';
 
-/**
- * Controller class to manage uploading and downloading of images from cloud
- * @author Alexander Lim Hong Xun
- */
+
+/// Controller class to manage uploading and downloading of images from cloud
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class ArchiveController {
   static const MAX_SIZE = 7 * 1024 * 1024;
 
-  /**
-   * Uploads image to cloud
-   * @author Alexander Lim Hong Xun
-   */
+  ///Uploads image to cloud
+  ///@param image Image to be uploaded to firebase
   static Future uploadPicture(File image) async { // Function needs image parameter, or move function to where the image is being clicked and stored
     StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child("${userProfile.getUserMail()}/${path.basename(image.path)}");
     StorageUploadTask uploadTask = firebaseStorageRef.putFile(image); // Once user clicks a picture, that picture, needs to be sent through the function as a parameter
@@ -30,10 +29,8 @@ class ArchiveController {
     print("Image has been uploaded");
   }
 
-  /**
-   * Downloads image from cloud
-   * @author Alexander Lim Hong Xun
-   */
+  ///Downloads image from cloud
+  ///@return A list of images
   static Future<List> downloadPicture() async {
     DatabaseController dc = new DatabaseController(email: userProfile.getUserMail());
     List downloadURLs = await dc.getDownloadUrls();

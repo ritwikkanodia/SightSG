@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-/**
- * Controller class to manage database
- */
+///
+///Controller class to manage database
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class DatabaseController {
   String email;
 
@@ -16,10 +18,9 @@ class DatabaseController {
 
   final CollectionReference imageLinkCollection = Firestore.instance.collection(COLLECTION_NAME);
 
-  /**
-   * Uploads link of uploaded image to the database
-   * @author Alexander Lim Hong Xun
-   */
+  ///Uploads link of uploaded image to the database
+  ///@param downloadUrl The url of the image
+  ///@param fileName Name of the image file
   Future updateImageLink(String downloadUrl, String fileName) async {
     return await Firestore.instance.runTransaction((transaction) async {
       await transaction.set(Firestore.instance.collection(COLLECTION_NAME)
@@ -31,10 +32,8 @@ class DatabaseController {
     });
   }
 
-  /**
-   * Retrieves a list of download urls for all uploaded images by the user
-   * @author Alexander Lim Hong Xun
-   */
+  ///Retrieves a list of download urls for all uploaded images by the user
+  ///@return A list of download urls
   Future<List> getDownloadUrls() async {
     List downloadUrls = new List();
     QuerySnapshot qs = await imageLinkCollection.document(this.email)

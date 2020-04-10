@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'Boundary/LoginUI.dart';
 
-//void main() => runApp(ImageToTextConverterApp());
 void main() => runApp(MyApp());
 
-//void main() => runApp(
-//      MaterialApp(
-//        debugShowCheckedModeBanner: false,
-//        home: Scaffold(
-//          body: SelectionPage(),
-//        ),
-//      ),
-//    );
-
+/// Main entry point to the application
+/// @author  Team Superman
+/// @version 1.0
+/// @since   2020-04-08
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

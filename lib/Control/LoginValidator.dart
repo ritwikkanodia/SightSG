@@ -7,6 +7,8 @@ UserProfile userProfile = new UserProfile();
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
+/// Authenticates the user through google sign in
+/// @return Success message
 Future<String> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   final GoogleSignInAuthentication googleSignInAuthentication =
@@ -45,6 +47,7 @@ Future<String> signInWithGoogle() async {
   return 'signInWithGoogle succeeded: $user';
 }
 
+///Logs out the user through google sign out
 void signOutGoogle() async {
   await googleSignIn.signOut();
 

@@ -75,7 +75,6 @@ class _MyHomePageState extends State<HomePage> {
 
   /// This method gets an image from a url
   /// @param source This is the source url
-  ///  @return Nothing
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
