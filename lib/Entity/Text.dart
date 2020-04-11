@@ -8,6 +8,10 @@ class Text {
   int _fontSize;
   Text _textWidget;
 
+  ///Text object constructor
+  ///@param text
+  ///@param fontstyle
+  ///@param fontsize
   Text(text, fontStyle, fontSize) {
     this._text = text;
     this._fontSize = fontSize;

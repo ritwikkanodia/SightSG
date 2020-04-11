@@ -1,4 +1,4 @@
-/// Entity class for the user profile
+/// User Profile Entity class
 /// @author  Team Superman
 /// @version 1.0
 /// @since   2020-04-08
@@ -8,8 +8,9 @@ class UserProfile {
   String _Mail;
   String _Display;
 
-
-  UserProfile(){
+  ///User Profile object constructor
+  ///@param Nothing
+  UserProfile() {
     this._ID = null;
     this._Name = null;
     this._Mail = null;
@@ -30,13 +31,13 @@ class UserProfile {
 
   String getUserDisplay() => _Display;
 
-  setUserDisplay(String url){
+  setUserDisplay(String url) {
     this._Display = url;
   }
 
   String getUserMail() => _Mail;
 
-  setUserMail(String mail){
+  setUserMail(String mail) {
     this._Mail = mail;
   }
 }

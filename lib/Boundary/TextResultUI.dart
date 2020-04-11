@@ -33,7 +33,6 @@ class _TextResultState extends State<TextResult> {
 
   _TextResultState(this.convertedText, this.pic);
 
-  String imageName = "'assets/Meme 1 - Please end this meeting.jpg'";
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
