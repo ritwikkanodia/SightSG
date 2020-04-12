@@ -1,11 +1,11 @@
-import '../Boundary/AudioResultUI.dart';
-import '../Boundary/TextResultUI.dart';
+import '../View/AudioResultUI.dart';
+import '../View/TextResultUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:io';
 import 'package:assignment_app/size_config.dart';
-import '../Control/ImageToTextController.dart';
+import '../Controller/ImageToTextController.dart';
 import 'MainButton.dart';
 
 /// User Interface for Selection Page. Allows user to select whether to convert image to text or audio

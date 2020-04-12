@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:assignment_app/Boundary/SelectionUI.dart';
+import 'package:assignment_app/View/SelectionUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import '../Control/ArchiveController.dart';
+import '../Controller/ArchiveController.dart';
 
 /// User Interface for Archive Page. Displays all the images uploaded to archive by the user.
 /// This UI includes: Uploaded images.

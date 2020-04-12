@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import '../Entity/UserImage.dart';
+import '../Model/UserImage.dart';
 
 /// Controller class to obtain image from the user.
 /// @author Team Superman

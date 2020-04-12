@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import '../size_config.dart';
-import '../Control/ArchiveController.dart';
-import '../Boundary/NavigationUI.dart';
+import '../Controller/ArchiveController.dart';
+import '../View/NavigationUI.dart';
 import 'MainButton.dart';
 
 /// User Interface for Test Result. Displays the result text converted from the uploaded image

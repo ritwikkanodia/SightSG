@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Boundary/LoginUI.dart';
-import '../Control/LoginValidator.dart';
+import '../View/LoginUI.dart';
+import '../Controller/LoginValidator.dart';
 
 /// User Interface for User Profile. Displays the user profile.
 /// This UI includes: User name, User email and log out button.

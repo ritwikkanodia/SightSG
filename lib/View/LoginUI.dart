@@ -1,6 +1,6 @@
-import 'package:assignment_app/Boundary/NavigationUI.dart';
+import 'package:assignment_app/View/NavigationUI.dart';
 import 'package:flutter/material.dart';
-import '../Control/LoginValidator.dart';
+import '../Controller/LoginValidator.dart';
 
 /// User Interface for Login UI. Display the login button and logo.
 /// This UI includes: Login button and logo

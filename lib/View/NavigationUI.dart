@@ -1,8 +1,8 @@
-import 'package:assignment_app/Boundary/UserProfileUI.dart';
-import 'package:assignment_app/Boundary/HomePageUI.dart';
+import 'package:assignment_app/View/UserProfileUI.dart';
+import 'package:assignment_app/View/HomePageUI.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:assignment_app/Boundary/InfoUI.dart';
+import 'package:assignment_app/View/InfoUI.dart';
 
 /// User Interface for Navigation UI. This UI allows user to navigate between Home Page, Info Page, and User Profile page.
 /// @author  Team Superman

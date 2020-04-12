@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:assignment_app/Boundary/MainButton.dart';
-import 'package:assignment_app/Control/AudioController.dart';
+import 'package:assignment_app/View/MainButton.dart';
+import 'package:assignment_app/Controller/AudioController.dart';
 import 'package:assignment_app/size_config.dart';
 
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter/material.dart';
-import '../Control/ArchiveController.dart';
-import '../Boundary/NavigationUI.dart';
+import '../Controller/ArchiveController.dart';
+import '../View/NavigationUI.dart';
 
 /// User Interface for Audio Result. Outputs the audio of the text contained in the uploaded image.
 /// This UI includes: Uploaded image, Play and stop button for the audio, Upload button, Home button

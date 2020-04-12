@@ -1,12 +1,12 @@
-import 'package:assignment_app/Boundary/MainButton.dart';
-import 'package:assignment_app/Boundary/SelectionUI.dart';
+import 'package:assignment_app/View/MainButton.dart';
+import 'package:assignment_app/View/SelectionUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment_app/size_config.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import '../Control/CameraController.dart';
+import '../Controller/CameraController.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'ArchiveUI.dart';

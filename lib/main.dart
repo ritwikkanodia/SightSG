@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Boundary/LoginUI.dart';
+import 'View/LoginUI.dart';
 
 void main() => runApp(MyApp());
 
