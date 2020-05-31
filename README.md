@@ -8,3 +8,11 @@ Flutter
 
 APIs:
 Google Firebase
+
+Authors:
+1. Kanodia Ritwik
+2. Koh Zhuang Chean
+3. Arjun Sing Mann
+4. Shaan Aryaman
+5. Alexander Lim Hong Xun
+6. Yap Joon Shen
